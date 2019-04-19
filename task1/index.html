@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Test page</title>
+  <style media="screen">
+    body {
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .column {
+      font-size: 4rem;
+      color: white;
+      font-weight: bold;
+      font-family: Helvetica;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /*1 part of the "razminka", used float*/
+    .floats .column {
+      float: left;
+      width: 33.33%; /*it's normal to use %*/
+    }
+    /*2 part of the "razminka", used inline-block*/
+    .blocks {
+    /*to display correctly: https://css-live.ru/articles/zagadochnye-otstupy-mezhdu-inlajn-blokami.html */
+      font-size: 0;
+    }
+    .blocks .column{
+      display: inline-block;
+      width: 33.33%;
+    }
+    /**
+      * 3 part of the "razminka - "flex-boxes".
+      * Here is some tutorial for this task:
+      * https://tproger.ru/translations/how-css-flexbox-works/
+      * https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+      * 
+      **/
+    .flexbox{
+      display: flex;
+    }
+    .flexbox .column {
+      flex-grow: 1;
+    }
+    /** last part of the 'razminka' - "grid".
+      * used this resource: https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout
+      *
+    **/
+    .grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="floats">
+    <div class="column" style="background-color: #1abc9c">1</div>
+    <div class="column" style="background-color: #2ecc71">2</div>
+    <div class="column" style="background-color: #3498db">3</div>
+  </section>
+  <section class="blocks">
+    <div class="column" style="background-color: #f39c12">1</div>
+    <div class="column" style="background-color: #d35400">2</div>
+    <div class="column" style="background-color: #c0392b">3</div>
+  </section>
+  <section class="flexbox">
+    <div class="column" style="background-color: #16a085">1</div>
+    <div class="column" style="background-color: #27ae60">2</div>
+    <div class="column" style="background-color: #2980b9">3</div>
+  </section>
+  <section class="grid">
+    <div class="column" style="background-color: #f1c40f">1</div>
+    <div class="column" style="background-color: #e67e22">2</div>
+    <div class="column" style="background-color: #e74c3c">3</div>
+  </section>
+</body>
+
+</html>
