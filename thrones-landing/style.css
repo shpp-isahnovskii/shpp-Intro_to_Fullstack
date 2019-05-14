@@ -13,23 +13,27 @@ main {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    height: 100vh;
 }
+
 .left-section {
     background-color: #790df5;
     flex-grow: 1;
     max-width: 50%;
     align-self: stretch;
+    background-image: url("source/images/maxresdefault.jpg");
+    background-size: cover;
+    background-position: center;
 }
-.left-section img {
+/* .left-section img {
     max-width: 110%;
-}
+} */
 
 .right-section {
     background-color: #b5ebf5;
     flex-grow: 1;
     max-width: 50%;
     align-self: stretch;
-
     background-image: url("source/images/darknoise.png");
 }
 
