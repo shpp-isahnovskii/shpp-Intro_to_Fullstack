@@ -12,7 +12,7 @@
     <body>
         <main>
         <section class="left-section"></section>
-        <section class="right-section">
+        <!-- <section class="right-section">
             <div class="reg_wrapper">
                 <h1>Game of Thrones</h1>
                 <form action="#">
@@ -21,6 +21,7 @@
                         <input type="email" placeholder="arya@westeros.com" name="email" required>
                         <hr>
                         <label for="psw"><b>Choose secure password</b></label>
+                        <div class="tips_text">must be atleast 8 characters</div>
                         <input type="password" placeholder="password" name="psw" required>
                         <hr>
                         <label class="container">
@@ -31,6 +32,36 @@
                         <button class="submit" type="submit">Sign Up</button>
                     </div>
                   </form>
+            </div>
+        </section> -->
+        <section class="right-section">
+            <div class="reg_wrapper">
+                <h1>Game of Thrones</h1>
+                    <div class="success_header">You've successfully joined the game.<br>Tell us more about yourself.</div>
+                    <form action="#">
+                        <div class="reg_form">
+                            <label for="name"><b>Who are you?</b></label>
+                            <div class="tips_text">Alpha-numeric username</div>
+                            <input type="text" placeholder="arya" name="name" required>
+                            <hr>
+                            <label for="house"><b>Your Great House</b></label>
+                                <input type="text" placeholder="Select your House" list="house">
+                                <datalist id="house">
+                                  <option value="Stark">
+                                  <option value="Lannister">
+                                  <option value="Greyjoy">
+                                  <option value="Arryn">
+                                  <option value="Baratheon">
+                                  <option value="Tully">
+                                  <option value="Tyrell">
+                                </datalist> 
+                            <hr>
+                            <label for="pref_hobby">Your preferences, hobbies, wishes, etc.</label>
+                            <input type="text" placeholder="I have long TOKILL list..." name="pref_hobby">
+                            <hr>
+                            <button class="submit" type="submit">Save</button>
+                        </div>
+                      </form>
             </div>
         </section>
         </main>

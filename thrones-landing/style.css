@@ -56,7 +56,7 @@ main {
     padding-left: 30px;
 
 }
-input[type=email], input[type=password] {
+input[type=email], input[type=password], input[type=text],input[list=house] {
     width: 100%;
     background: none;
     border: none;
@@ -67,7 +67,7 @@ input[type=email], input[type=password] {
 }
 
 /*borders for registration form :if hower - Set to 0*/
-input[type=email]:placeholder-shown, input[type=password]:placeholder-shown {
+input[type=email]:placeholder-shown, input[type=password]:placeholder-shown, input[type=text]:placeholder-shown, input[list=house]:placeholder-shown {
     outline: 0;
 }
 
@@ -76,6 +76,11 @@ hr {
     border: none;
     display: block;
     height: 2px;
+}
+.tips_text {
+  color: #fef8eb;
+  font-size: 14px;
+  margin-bottom: 4px;
 }
 
 /*CHECKBOX
@@ -157,3 +162,20 @@ hr {
     cursor:pointer;
     width: 100%;
   }
+
+.success_header {
+  border-left: 2px solid #d3bb89;
+  padding-left: 18px;
+  color: #fef8eb;
+  margin-bottom: 30px;
+}
+
+input[list=house]::placeholder, input[list=house] {
+  color: #fef8eb;
+  font-size: 14px;
+
+}
+input[name=pref_hobby] {
+  margin-bottom: 20px;
+}
+
