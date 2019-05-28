@@ -1,150 +1,154 @@
-*{
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.2;
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.2;
 }
 body {
-    margin: 0;
+  margin: 0;
 }
 li {
-    list-style-type: none;
+  list-style-type: none;
 }
-li a, .logo a{
-    text-decoration: none;
+li a,
+.logo a {
+  text-decoration: none;
 }
 
 section {
-    text-align: center;
+  text-align: center;
 }
 
 header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 header ul {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 header ul li {
-    padding-right: 50px;
+  padding-right: 50px;
 }
 header ul li a {
-    font-size: 18px;
-    color: #757575;
+  font-size: 18px;
+  color: #757575;
 }
 
 .logo a {
-    margin-left: 50px;
-    font-size: 48px;
-    font-weight: bold;
-    color: #333333;
+  margin-left: 50px;
+  font-size: 48px;
+  font-weight: bold;
+  color: #333333;
 }
 .plus-color {
-    font-size: 48px;
-    color: #1abc9c;
+  font-size: 48px;
+  color: #1abc9c;
 }
 .n-color {
-    letter-spacing: 8px;
+  letter-spacing: 8px;
 }
 
 .app-review {
-    display: flex;
-    justify-content: space-around;
-    background-color: #1abc9c;
-    padding: 32px 0;
+  display: flex;
+  justify-content: space-around;
+  background-color: #1abc9c;
+  padding: 32px 0;
 }
 
-.app-review_right-side, .app-review_left-side {
-    display: block;
-    width: 50%;
+.app-review_right-side,
+.app-review_left-side {
+	display: block;
+  width: 50%;
 }
+.app-review_left-side img {
+	max-width: 64%;
+	padding-top: 30px;
+}
+
 .app-review_right-side {
-    text-align: left;
-    color: #ffffff;
-    
+  text-align: left;
+  color: #ffffff;
 }
-.app-review_right-side p, .app-review_right-side h1 {
-    max-width: 80%;
-    text-align: justify;
-    padding-top: 10px;
+.app-review_right-side p,
+.app-review_right-side h1 {
+  max-width: 80%;
+  text-align: justify;
+  padding-top: 10px;
 }
 .app-review_right-side h1 {
-    font-size: 28px;
+  font-size: 28px;
 }
 .app-review_right-side p {
-    font-size: 20px;
-}
-
-.app-review_left-side img {
-    max-width: 30%;
+  font-size: 20px;
 }
 
 .buy-now {
-    margin-top: 50px;
-    border: 2px solid #fff;
-    text-align: center;
-    border-radius: 4px;
-    padding: 10px 20px;
-    width: 140px;
-    cursor: pointer;
+  margin-top: 50px;
+  border: 2px solid #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 10px 20px;
+  width: 140px;
+  cursor: pointer;
 }
 
 .our-development {
-    margin: 40px 0;
-    display: flex;
+  margin: 40px 0;
+  display: flex;
 }
 .dev {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .registration-form {
-    background-color: #16a085;
-    padding-bottom: 40px;
+  background-color: #16a085;
+  padding-bottom: 40px;
 }
 
 .registration-form h2 {
-    padding-top: 30px;
-    color: #fff;
+  padding-top: 30px;
+  color: #fff;
 }
 
 i {
-    color: #fff;
+  color: #fff;
 }
 .icon {
-    padding: 16px 0;
-    background-color: #1abc9c;
-    overflow: hidden;
-    width: 85px;
-    border-radius: 50%;
+  padding: 16px 0;
+  background-color: #1abc9c;
+  overflow: hidden;
+  width: 85px;
+  border-radius: 50%;
 }
 .dev p {
-    margin: 0;
+  margin: 0;
 }
 .icon img {
-    height: 45px;
-    filter: invert(1);
+  height: 45px;
+  filter: invert(1);
 }
-.registration-form form input, textarea {
-    padding: 4px;
-    margin-top: 8px;
-    height: 30px;
-    width: 600px;
+.registration-form form input,
+textarea {
+  padding: 4px;
+  margin-top: 8px;
+  height: 30px;
+  width: 600px;
 }
 textarea {
-    resize: vertical;
-    height: 600px;
+  resize: vertical;
+  height: 600px;
 }
-.registration-form form input[type=submit] {
-    margin-top: 40px;
-    height: 40px;
-    width: 160px;
-    background-color: #16a085;
-    color: white;
-    border: 2px solid white;
-    border-radius: 4px;
-    cursor: pointer;
+.registration-form form input[type="submit"] {
+  margin-top: 40px;
+  height: 40px;
+  width: 160px;
+  background-color: #16a085;
+  color: white;
+  border: 2px solid white;
+  border-radius: 4px;
+  cursor: pointer;
 }
