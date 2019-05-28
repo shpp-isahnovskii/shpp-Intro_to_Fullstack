@@ -27,11 +27,13 @@ header {
   justify-content: space-between;
 }
 header ul {
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
 }
 header ul li {
   padding-right: 50px;
+  text-transform: uppercase;
 }
 header ul li a {
   font-size: 18px;
