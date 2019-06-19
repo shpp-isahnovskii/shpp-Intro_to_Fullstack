@@ -19,6 +19,7 @@ function sum_of_num(){
     if(counter % 2 === 0 || counter % 3 === 0 || counter % 7 === 0) {
       sum =+ counter;
       console.log(counter);
+      
     }
     counter++;
   }
