@@ -32,6 +32,7 @@ function reset() {
     document.getElementById("sum_of_two").innerHTML = "";
   }
 }
+
 var input = document.getElementById("sum");
 input.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
