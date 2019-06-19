@@ -1,33 +1,31 @@
-
-let a = document.getElementById("sum_num_1");
-let b = document.getElementById("sum_num_2");
-
 function sum_of_num(){
+
+  let a = parseInt(document.getElementById("sum_num_1").value);
+  let b = parseInt(document.getElementById("sum_num_2").value);
+
+  let index;
   let counter;
   let sum = 0;
 
   if(a > b) {
-    counter = a - b;
+    index = a - b;
+    counter = b;
   } else {
-    counter = b - a;
+    index = b - a;
+    counter = a;
+  }
+  
+  for(let i = 0; i < index; i++) {
+    if(counter % 2 === 0 || counter % 3 === 0 || counter % 7 === 0) {
+      sum =+ counter;
+      console.log(counter);
+    }
+    counter++;
   }
 
-  for (let index = 0; index < counter; index++) {
-    
-    
-    sum += 
-
-  }
-
-  let regxp = /[237]$/g;
-
-  let found = a.value.match(regxp);
-
-  console.log(found);
-
-
-  document.getElementById("sum_of_two").innerHTML = parseInt(a.value) + parseInt(b.value);
+  console.log(sum);
 }
+
 function reset() {
   if(document.getElementById("sum_of_two").value != "") {
     document.getElementById("sum_num_1").value = "";
