@@ -3,18 +3,23 @@
  * Numbers must ends on 2,3,7 to be calculated.
  */
 
-function sum_of_num() {
+const input = document.getElementById("sum");
+input.addEventListener("keyup", function (event) {
 
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    sum_of_num();
+  }
+  
+});
 
-
-}
 function sum_of_num() {
 
   let a = parseInt(document.getElementById("sum_num_1").value);
   let b = parseInt(document.getElementById("sum_num_2").value);
 
-  let index;
-  let counter;
+  let index; //start value
+  let counter; //counter from start value to end of cycle
   let sum = 0;
 
   if (a > b) {
@@ -25,17 +30,16 @@ function sum_of_num() {
     counter = a;
   }
 
-  let remainder; // reminder for formula
+  let remainder; // reminder of 10
 
-  for (let i = 0; i < index; i++) {
+  for (let i = 0; i <= index; i++) {
     remainder = Math.abs(counter % 10);
     if (remainder == 2 || remainder == 3 || remainder == 7) {
       sum += counter;
-      console.log("counter: " + counter);
     }
     counter++;
   }
-  console.log("sum: " + sum);
+  document.getElementById("sum_of_two").innerHTML = sum;
 }
 
 function reset() {
@@ -45,18 +49,13 @@ function reset() {
     document.getElementById("sum_of_two").innerHTML = "";
   }
 }
-
 //-------------- end of Part 1 ----------------
 
-const input = document.getElementById("sum");
-input.addEventListener("keyup", function (event) {
+function get_time() {
+  let input_seconds = document.getElementById("get_seconds").value;
 
-  if (event.keyCode === 13) {
-    event.preventDefault();
-  }
-
-});
-
-
-
-
+  var date = new Date(null);
+  date.setSeconds(input_seconds);
+  var time = date.toISOString().substr(11,8); //https://stackoverflow.com/questions/6312993/javascript-seconds-to-time-string-with-format-hhmmss/6313008
+  document.getElementById("set_time").innerHTML = time;
+}

@@ -1,26 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>razminka</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-   
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>razminka</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
+
 <body>
-    <div class="sum_of_numbers">
-        <form action="#" id="sum">
-        Part 1: 
-        input two numbers:
-          <input type="text" id="sum_num_1" name="sum1" maxlength="4"> + 
-          <input type="text" id="sum_num_2" name="sum2" maxlength="4"> = <span id="sum_of_two" length="5"></span>
-        </form>
-        <div class="buttons_part_one">
-            <button onclick="sum_of_num()">calculate</button>
-            <button onclick="reset()">reset</button>
-        </div>
-    </div> 
-    <script src="warm_up.js"></script>
+  <article>
+    <div class="definition">
+      <h3>Part 1:</h3>
+      <p>Fill two inputs with numbers. The programm will calculate all numbers between this two, what's ends for
+        2,3,7.</p>
+      input two numbers:
+    </div>
+
+    <form action="#" id="sum">
+      <input type="text" id="sum_num_1" name="sum1" maxlength="4"> and
+      <input type="text" id="sum_num_2" name="sum2" maxlength="4"> = <span id="sum_of_two" length="5"></span>
+    </form>
+    <!-- <div class="buttons_part_one"> -->
+    <button onclick="sum_of_num()">calculate</button>
+    <button onclick="reset()">reset</button>
+    <!-- </div> -->
+    </div>
+  </article>
+
+  <article>
+    <h3>Part 1:</h3>
+    <p>Fill two inputs with numbers. The programm will calculate all numbers between this two, what's ends for
+      2,3,7.
+      </h3>
+      input two numbers:</p>
+  </div>
+  <input type="text" id="get_seconds"> = <span id="set_time"></span>
+  <button onclick="get_time()">convert</button>
+  <input type="time" id="get_time"> = <span id="set_seconds"></span>
+  </div>
+  </article>
+  <script src="warm_up.js"></script>
 </body>
+
 </html>
