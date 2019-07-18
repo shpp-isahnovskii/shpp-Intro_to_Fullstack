@@ -14,7 +14,7 @@
   <article>
     <div class="definition">
       <h3>Part 1:</h3>
-      <p>Fill two inputs with numbers. The programm will calculate all numbers between this two, what's ends for
+      <p>Fill this two inputs with numbers. The programm will calculate all numbers between this two, what's ends for
         2,3,7.</p>
       input two numbers:
     </div>
@@ -31,16 +31,15 @@
   </article>
 
   <article>
-    <h3>Part 1:</h3>
-    <p>Fill two inputs with numbers. The programm will calculate all numbers between this two, what's ends for
-      2,3,7.
-      </h3>
-      input two numbers:</p>
-  </div>
-  <input type="text" id="get_seconds"> = <span id="set_time"></span>
-  <button onclick="get_time()">convert</button>
-  <input type="time" id="get_time"> = <span id="set_seconds"></span>
-  </div>
+    <h3>Part 2:</h3>
+    <p>Fill this input with time in seconds.The programm will transform your input to format: hh:mm:ss</p>
+    </div>
+    <input type="text" id = "get_seconds" placeholder="seconds"> = <span id="set_time"></span>
+    <button onclick="to_time_convert()">convert</button>
+    <p>Fill this input with time in format hh:mm:ss.The programm will transform your input to value in seconds</p>
+    <input type="text" id = "get_time" placeholder="hh:mm:ss"> = <span id="set_seconds"></span>
+    <button onclick="to_seconds_convert()">convert</button>
+    </div>
   </article>
   <script src="warm_up.js"></script>
 </body>
