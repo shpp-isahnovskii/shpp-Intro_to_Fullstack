@@ -67,22 +67,23 @@ function to_time_convert() {
 
   let input_seconds = document.getElementById("get_seconds").value;
 
-  let seconds = input_seconds % 60;
-  let minutes = (input_seconds - seconds) / 60 % 60;
-  let hours = Math.floor(input_seconds / 3600);
+  let regExp = /^([0-9]+)$/
 
-  if (hours < 10) { hours = "0" + hours }
-  if (minutes < 10) { minutes = "0" + minutes }
-  if (seconds < 10) { seconds = "0" + seconds }
+  if (!input_seconds.match(regExp)) {
 
+    alert("Invalid value.\nPlease input some numbers");
 
-  document.getElementById("set_time").innerHTML = hours + ":" + minutes + ":" + seconds;
-  // var date = new Date(null);
-  // date.setSeconds(input_seconds);
-  // var time = date.toISOString().substr(11,8); //https://stackoverflow.com/questions/6312993/javascript-seconds-to-time-string-with-format-hhmmss/6313008
-  // console.log(date);
-  // document.getElementById("set_time").innerHTML = time;
+  } else {
+    let seconds = input_seconds % 60;
+    let minutes = (input_seconds - seconds) / 60 % 60;
+    let hours = Math.floor(input_seconds / 3600);
 
+    if (hours < 10) { hours = "0" + hours }
+    if (minutes < 10) { minutes = "0" + minutes }
+    if (seconds < 10) { seconds = "0" + seconds }
+
+    document.getElementById("set_time").innerHTML = hours + ":" + minutes + ":" + seconds;
+  }
 }
 /**
  * 2. Function convert user input hh:mm:ss to the number amount of seconds in that input
@@ -96,9 +97,9 @@ function to_seconds_convert() {
    */
   let regExp = /^([0-9]+)((:[0-5][0-9]){2})$/
 
-  if(!input_time.match(regExp)) {
+  if (!input_time.match(regExp)) {
 
-    alert("Something being wrong.\nPlease use text formated by hh:mm:ss");
+    alert("Something being wrong.\nPlease use text in format: hh:mm:ss");
 
   } else {
     let split_time = input_time.split(':');
@@ -106,6 +107,75 @@ function to_seconds_convert() {
 
     document.getElementById("set_seconds").innerHTML = seconds;
   }
-
-  //-------------- end of Part 2 ----------------
 }
+//-------------- end of Part 2 ----------------
+
+
+/**
+ * Part 3.
+ * User has two input date form. This function will calculate the difference between two dates
+ */
+function date_difference() {
+  let split = /-|:|T/;
+  //                    YYYY MM DD HH MM
+  //Date input example: 4556-12-23T19:08
+  let first_date = new Date(document.getElementById("get_datetime_one").value + "Z");
+  let second_date = new Date(document.getElementById("get_datetime_two").value + "Z");
+  
+  console.log(first_date);
+  console.log(second_date);
+
+  if ( (first_date == "Invalid Date") || (second_date == "Invalid Date") ) {
+    alert("Invalid input.\nMake sure what all entered values are correct");
+  } else {
+
+    if(first_date < second_date) {
+      [first_date, second_date] = [second_date, first_date];
+    }
+    
+    //two arrays of dates, prepeared for calculate
+    let first_date_arr = [first_date.getSeconds(), first_date.getMinutes(), first_date.getHours(), first_date.getDate(), first_date.getMonth(), first_date.getFullYear()];
+    let second_date_arr = [second_date.getSeconds(), second_date.getMinutes(), second_date.getHours(), second_date.getDate(), second_date.getMonth(), second_date.getFullYear()];
+
+    console.log(first_date_arr);
+    console.log(second_date_arr);
+
+    let element = {};
+
+    for (let i = 0; i < first_date_arr.length; i++) {
+
+      element[i] = first_date_arr[i] - second_date_arr[i];
+
+      if(element[i] < 0) {
+        element[i] = date_recalculate(i, element[i]);
+        element[i + 1]--;
+      }
+    }
+  console.log(element);
+  }
+}
+
+
+function date_recalculate(index, value) {
+  // {seconds, minutes, hours, days, mounths, years}
+  switch(index) {
+    case 0:             //seconds
+    case 1:             //minutes
+    case 2: value +=60; //hours
+    break;
+    case 3: value +=24; //days
+
+    break;
+    case 4: value +=31; //months
+    break;
+
+  }
+  return value;
+}
+
+function month_recalculate(value) {
+  const days_in_months = [31,28,31,30,31,30,31,31,30,31,30,31];
+  
+}
+
+//-------------- end of Part 3 ----------------

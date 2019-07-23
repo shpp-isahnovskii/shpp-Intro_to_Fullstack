@@ -14,7 +14,7 @@
   <article>
     <div class="definition">
       <h3>Part 1:</h3>
-      <p>Fill this two inputs with numbers. The programm will calculate all numbers between this two, what's ends for
+      <p>Hello there. Fill this two inputs with numbers. I'll will calculate all numbers between this two, what's ends for
         2,3,7.</p>
       input two numbers:
     </div>
@@ -32,15 +32,26 @@
 
   <article>
     <h3>Part 2:</h3>
-    <p>Fill this input with time in seconds.The programm will transform your input to format: hh:mm:ss</p>
+    <p>Fill this input with time in seconds. I'll transform your input to format: hh:mm:ss</p>
     </div>
     <input type="text" id = "get_seconds" placeholder="seconds"> = <span id="set_time"></span>
     <button onclick="to_time_convert()">convert</button>
-    <p>Fill this input with time in format hh:mm:ss.The programm will transform your input to value in seconds</p>
+    <p>Fill this input with time in format hh:mm:ss.I'll transform your time value in to seconds</p>
     <input type="text" id = "get_time" placeholder="hh:mm:ss"> = <span id="set_seconds"></span>
     <button onclick="to_seconds_convert()">convert</button>
     </div>
   </article>
+
+  <article>
+    <h3>Part 3:</h3>
+    <p>Hey! Input two time values. Next, i'll calculate differene in time between of them.</p>
+    <input type="datetime-local" id = "get_datetime_one" value="2001-05-01T00:00">
+    <input type="datetime-local" id = "get_datetime_two" value="2000-12-01T00:00">
+    =
+    <span id="set_new_date"></span>
+    <button onclick="date_difference()">calculate</button>
+  </article>
+
   <script src="warm_up.js"></script>
 </body>
 
