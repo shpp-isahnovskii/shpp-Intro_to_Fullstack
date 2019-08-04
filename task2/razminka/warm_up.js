@@ -219,19 +219,10 @@ function draw_canvas() {
 
   canvas = document.getElementById("myCanvas");
   if (canvas.getContext) { //if browser support canvas
+    
     ctx = canvas.getContext('2d'); //add drawing context
+    document.getElementById("btn_draw_board").style.display = "block";//display hidden element
 
-    canvas.width = document.getElementById("get_canvas_x").value;;
-    canvas.height = document.getElementById("get_canvas_y").value;;
-
-    /*display hidden elements*/
-    document.getElementById("myCanvas").style.display = "block";
-    document.getElementById("get_chess_x").style.display = "block";
-    document.getElementById("get_chess_y").style.display = "block";
-    document.getElementById("btn_draw_board").style.display = "block";
-
-    /*change create canvas button text to recreate*/
-    document.getElementById("btn_draw_canvas").innerHTML = "recreate canvas";
   } else {
     alert("your browser don't support the canvas");
   }
@@ -247,12 +238,12 @@ function draw_board() {
   let rows = +document.getElementById("get_chess_x").value; //add "+" symbol before to transform string into int
   let cols = +document.getElementById("get_chess_y").value;
   
-  let canva_height = document.getElementById("myCanvas").height;
-  let canva_width = document.getElementById("myCanvas").width;
+  let canva_height = canvas.height;
+  let canva_width = canvas.width;
 
   ctx.clearRect(0, 0, canva_width, canva_height);//clear canvas
 
-  let max_size = cols > rows ? cols : rows; //take maxi value to calculete size of the squares from this value
+  let max_size = cols >= rows ? cols : rows; //take maxi value to calculete size of the squares from this value
 
   let square_size = Math.sqrt((canva_height * canva_width) / (max_size * max_size)); // one square width or heigth size
 

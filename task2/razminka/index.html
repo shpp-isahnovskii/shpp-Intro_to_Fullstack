@@ -56,17 +56,13 @@
     <h3>Part 4:</h3>
     <p>Here is two inputs, they build a chess board. Frist input is for rows, second is for columns.</p>
 
-    <input type="number" id="get_canvas_x" placeholder="canvas size X" value="250">
-    <input type="number" id="get_canvas_y" placeholder="canvas size Y" value="250">
-    <button id="btn_draw_canvas" onclick="draw_canvas()">create canvas</button>
-
     <canvas id="myCanvas" width="250" height="250"></canvas> <!-- add canvas here and hide it-->
     <input type="number" id="get_chess_x" placeholder="X axis">
     <input type="number" id="get_chess_y" placeholder="Y axis">
     <button id="btn_draw_board" onclick="draw_board()">create board</button>
   </article>
 
-  <script src="warm_up.js"></script>
+  <script src="warm_up.js" onload = "draw_canvas()"></script>
 </body>
 
 </html>
