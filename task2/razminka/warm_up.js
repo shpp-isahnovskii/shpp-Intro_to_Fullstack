@@ -115,18 +115,18 @@ function to_seconds_convert() {
  * Part 3.
  * User has two input date form. This function will calculate the difference between two dates
  */
-function the_date_difference() {
+function dates_difference() {
   //let split = /-|:|T/;
   //                    YYYY MM DD HH MM
   //Date input example: 4556-12-23T19:08
   let first_date = new Date(document.getElementById("get_datetime_one").value + "Z");
   let second_date = new Date(document.getElementById("get_datetime_two").value + "Z");
-  
-  if ( (first_date == "Invalid Date") || (second_date == "Invalid Date") ) {
+
+  if ((first_date == "Invalid Date") || (second_date == "Invalid Date")) {
     alert("Invalid input.\nMake sure what all entered values are correct");
   } else {
 
-    if(first_date < second_date) { //change to date values if second one bigger then first
+    if (first_date < second_date) { //change to date values if second one bigger then first
       [first_date, second_date] = [second_date, first_date];
     }
     date_calculation(first_date, second_date);
@@ -141,13 +141,13 @@ function date_calculation(d1, d2) {
   result = new Array(6).fill(0);
   for (let i = 0; i < result.length; i++) {
     result[i] = dates_subtract(d1, d2, i) + result[i];
-    
-    if(result[i] < 0) {
+
+    if (result[i] < 0) {
       result[i] = result[i] + value_bust(i, d1); // result[i] can be 0, or -1 if previous value was busted
       result[i + 1]--; //minus 1 value to the next value in the array
+    }
   }
-}
-  document.getElementById("set_new_date") = "seconds(" + result[0] + "), " + "minutes(" + result[1] + "), " +"hours(" + result[2] + "), " +"days(" + result[3] + "), " + "months(" + result[4] + "), " +"years(" + result[5] + ").";
+  document.getElementById("set_new_date").innerHTML = "seconds(" + result[0] + "), " + "minutes(" + result[1] + "), " + "hours(" + result[2] + "), " + "days(" + result[3] + "), " + "months(" + result[4] + "), " + "years(" + result[5] + ").";
 }
 
 /**
@@ -160,36 +160,36 @@ function dates_subtract(d1, d2, index) {
 
   let result = 0;
 
-  switch(index) {
+  switch (index) {
     case 0: result = d1.getSeconds() - d2.getSeconds();
-    break;
+      break;
     case 1: result = d1.getMinutes() - d2.getMinutes();
-    break;
+      break;
     case 2: result = d1.getHours() - d2.getHours();
-    break;
+      break;
     case 3: result = d1.getDate() - d2.getDate();
-    break;
+      break;
     case 4: result = d1.getMonth() - d2.getMonth();
-    break;
+      break;
     default: result = d1.getFullYear() - d2.getFullYear();
   }
-    return result;
+  return result;
 }
 
 function value_bust(index, d1) {
   //case: 0 - seconds, 1 - minutes, 2 - hours, 3 - days, 4 - mounths, 5 - years.
   let value = 0;
-  
-  switch(index) {
+
+  switch (index) {
     case 0:             //transform 1 minute to +60 seconds
     case 1: value = 60; //from hours to minutes +60
-    break;
+      break;
     case 2: value = 24; //from days to hours + 24
-    break;
+      break;
     case 3: value = month_discover(d1); //from months to days 28-31
-    break;
+      break;
     case 4: value = 12; //from years to months +12
-    break;
+      break;
   }
 
   return value;
@@ -206,5 +206,63 @@ function month_discover(date) {
 
 /**
  * Part 4.
- * User has two input date form. This function will make chess board
+ * User has two inputs in the date form: amount_x and amounty. This function will create chess board a*b
+ * lowest size is 1x1;
  */
+let canvas; // make the canvas for a one time. doesn't need to be redraw in draw_board() cycle
+let ctx; // same as canvas, i don't push this let inside the draw_board()
+
+/**
+ * this function get two inputs: x and y sizes of the futured canvas. Then We unhide canvas and buttons that build chess board.
+ */
+function draw_canvas() {
+
+  canvas = document.getElementById("myCanvas");
+  if (canvas.getContext) { //if browser support canvas
+    ctx = canvas.getContext('2d'); //add drawing context
+
+    canvas.width = document.getElementById("get_canvas_x").value;;
+    canvas.height = document.getElementById("get_canvas_y").value;;
+
+    /*display hidden elements*/
+    document.getElementById("myCanvas").style.display = "block";
+    document.getElementById("get_chess_x").style.display = "block";
+    document.getElementById("get_chess_y").style.display = "block";
+    document.getElementById("btn_draw_board").style.display = "block";
+
+    /*change create canvas button text to recreate*/
+    document.getElementById("btn_draw_canvas").innerHTML = "recreate canvas";
+  } else {
+    alert("your browser don't support the canvas");
+  }
+}
+
+
+/**
+ * We draw a board on our canvas here. For this we take our global ctx and canvas. Then take new values from our user: x y chess boxes.
+ * Finaly we calculate size of each box and draw them on the canvas.
+ */
+function draw_board() {
+
+  let rows = +document.getElementById("get_chess_x").value; //add "+" symbol before to transform string into int
+  let cols = +document.getElementById("get_chess_y").value;
+  
+  let canva_height = document.getElementById("myCanvas").height;
+  let canva_width = document.getElementById("myCanvas").width;
+
+  ctx.clearRect(0, 0, canva_width, canva_height);//clear canvas
+
+  let max_size = cols > rows ? cols : rows; //take maxi value to calculete size of the squares from this value
+
+  let square_size = Math.sqrt((canva_height * canva_width) / (max_size * max_size)); // one square width or heigth size
+
+  //cycle to buils a chess board
+  for (let y = 0; y < cols; y++) {
+    for (let x = 0; x < rows; x++) {
+      if ((x + y) % 2 == 0) {
+        ctx.fillRect(x * square_size, y * square_size, square_size, square_size);//coordinates (x, y, width, height)
+      }
+    }
+  }
+}
+//-------------- end of Part 4 ----------------

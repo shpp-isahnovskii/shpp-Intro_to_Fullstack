@@ -1,24 +1,24 @@
 /**
  * Part 1. Sum of numbers
  */
-article{
-  display: flex;
-  flex-direction: column;
-}
-span {
-  display: inline-block;
-  width: 40px;
-}
-.sum_of_numbers input {
-  width: 30px;
-}
-.buttons_part_one {
-  margin-left: 100px;
-}
-.buttons_part_one button {
-  margin-bottom: 10px;
+input, button {
+  display: block;
 }
 
 /**
  * Part 2. Sum of numbers
  */
+
+
+
+/**
+ * Part 4. the chess board
+ */
+ canvas {
+  /*use background and borders to find your canvas*/
+  background-color: rgba(200, 200, 200, 0.2);
+  border: black solid 1px;
+}
+#get_chess_x, #get_chess_y, #btn_draw_board, #myCanvas {
+  display: none;
+}
