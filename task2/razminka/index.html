@@ -1,68 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>razminka</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>razminka</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
 
-</head>
+  <body>
+    <article>
+      <div class="definition">
+        <h3>Part 1:</h3>
+        <p>Hello there. Fill this two inputs with numbers. I'll will calculate all numbers between this two, what's ends for
+          2,3,7.</p>
+        input two numbers:
+      </div>
 
-<body>
-  <article>
-    <div class="definition">
-      <h3>Part 1:</h3>
-      <p>Hello there. Fill this two inputs with numbers. I'll will calculate all numbers between this two, what's ends for
-        2,3,7.</p>
-      input two numbers:
-    </div>
+      <form action="#" id="sum">
+        <input type="text" id="sum_num_1" name="sum1" maxlength="4"> and
+        <input type="text" id="sum_num_2" name="sum2" maxlength="4"> = <span id="sum_of_two" length="5"></span>
+      </form>
+      <!-- <div class="buttons_part_one"> -->
+      <button onclick="sum_of_num()">calculate</button>
+      <button onclick="reset()">reset</button>
+      <!-- </div> -->
+      </div>
+    </article>
 
-    <form action="#" id="sum">
-      <input type="text" id="sum_num_1" name="sum1" maxlength="4"> and
-      <input type="text" id="sum_num_2" name="sum2" maxlength="4"> = <span id="sum_of_two" length="5"></span>
-    </form>
-    <!-- <div class="buttons_part_one"> -->
-    <button onclick="sum_of_num()">calculate</button>
-    <button onclick="reset()">reset</button>
-    <!-- </div> -->
-    </div>
-  </article>
+    <article>
+      <h3>Part 2:</h3>
+      <p>Fill this input with time in seconds. I'll transform your input to format: hh:mm:ss</p>
+      </div>
+      <input type="text" id = "get_seconds" placeholder="seconds"> = <span id="set_time"></span>
+      <button onclick="to_time_convert()">convert</button>
+      <p>Fill this input with time in format hh:mm:ss.I'll transform your time value in to seconds</p>
+      <input type="text" id = "get_time" placeholder="hh:mm:ss"> = <span id="set_seconds"></span>
+      <button onclick="to_seconds_convert()">convert</button>
+      </div>
+    </article>
 
-  <article>
-    <h3>Part 2:</h3>
-    <p>Fill this input with time in seconds. I'll transform your input to format: hh:mm:ss</p>
-    </div>
-    <input type="text" id = "get_seconds" placeholder="seconds"> = <span id="set_time"></span>
-    <button onclick="to_time_convert()">convert</button>
-    <p>Fill this input with time in format hh:mm:ss.I'll transform your time value in to seconds</p>
-    <input type="text" id = "get_time" placeholder="hh:mm:ss"> = <span id="set_seconds"></span>
-    <button onclick="to_seconds_convert()">convert</button>
-    </div>
-  </article>
+    <article>
+      <h3>Part 3:</h3>
+      <p>Hey! Input two time values. Next, i'll calculate differene in time between of them.</p>
+      <input type="datetime-local" id = "get_datetime_one" value="2001-02-01T00:00">
+      <input type="datetime-local" id = "get_datetime_two" value="2000-01-02T00:00">
+      =
+      <span id="set_new_date"></span>
+      <button onclick="dates_difference()">calculate</button>
+    </article>
 
-  <article>
-    <h3>Part 3:</h3>
-    <p>Hey! Input two time values. Next, i'll calculate differene in time between of them.</p>
-    <input type="datetime-local" id = "get_datetime_one" value="2001-02-01T00:00">
-    <input type="datetime-local" id = "get_datetime_two" value="2000-01-02T00:00">
-    =
-    <span id="set_new_date"></span>
-    <button onclick="dates_difference()">calculate</button>
-  </article>
-
-  <article>
-    <h3>Part 4:</h3>
-    <p>Here is two inputs, they build a chess board. Frist input is for rows, second is for columns.</p>
-
-    <canvas id="myCanvas" width="250" height="250"></canvas> <!-- add canvas here and hide it-->
-    <input type="number" id="get_chess_x" placeholder="X axis">
-    <input type="number" id="get_chess_y" placeholder="Y axis">
-    <button id="btn_draw_board" onclick="draw_board()">create board</button>
-  </article>
-
-  <script src="warm_up.js" onload = "draw_canvas()"></script>
-</body>
-
+    <article>
+      <h3>Part 4.1:</h3>
+      <p>Here is two inputs, they build a chess board. Frist input is for rows, second is for columns.</p>
+  
+      <canvas id="myCanvas" width="250" height="250"></canvas> <!-- add canvas here and hide it-->
+      <input type="number" id="get_chess_x" placeholder="X axis">
+      <input type="number" id="get_chess_y" placeholder="Y axis">
+      <button id="btn_draw_board" onclick="draw_board()">create board</button>
+    </article>
+    <h3>
+    <h3>Part 4.2:</h3>
+      <p>Here is second chess board, but made by using div's</p>
+      <input type="number" id="get_board_size" placeholder="input board size">
+      <button id="btn_div_board" onclick="draw_div_board()">create board</button>
+    <div id="chess_board_div"></div>
+  
+    <script src="warm_up.js" onload = "draw_canvas()"></script>
+    
+  </body>
+  
 </html>

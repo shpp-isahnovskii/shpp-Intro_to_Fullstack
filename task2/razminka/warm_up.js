@@ -256,4 +256,64 @@ function draw_board() {
     }
   }
 }
-//-------------- end of Part 4 ----------------
+//-------------- end of Part 4.1 ----------------
+
+/**
+ * Part 4.2 - There is i used div-s to make board.
+ */
+function draw_div_board() {
+
+  let board_size = document.getElementById("get_board_size").value; // get size of the board (n * n)
+
+  if(document.getElementById("chess_board_div").firstChild) { //if something inside. Means if board was built once then remove it
+    remove_old_board("chess_board_div");
+  }
+  
+  for(let i = 0; i < board_size; i++) {
+    for(let j = 0; j < board_size; j++) {
+      let new_div = document.createElement("div");
+      if( (i + j) % 2) {
+        new_div.setAttribute("class", "black chess_block");
+      } else {
+        new_div.setAttribute("class", "white chess_block");
+      }
+      document.getElementById("chess_board_div").appendChild(new_div);
+    }
+  document.getElementById("chess_board_div").appendChild(document.createElement("br"));
+  }
+  set_board_size("chess_board_div", board_size); // "chess_board_div" - id of the div  that response for size of the board
+}
+
+/**
+ * Function build board inside the tag
+ * @param {id wrapper of the board. Board will be spawn in it} div_name 
+ * @param {size of the board} board_size 
+ */
+function set_board_size(div_name, board_size) {
+  /*get window size width and height*/
+  let bigger_val = window.innerWidth; 
+  let lower_val = window.innerHeight;
+
+    if(bigger_val < lower_val) {
+      [bigger_val, lower_val] = [lower_val, bigger_val];
+    }
+    bigger_val *= 0.8; // wanna get 80% of the min width
+    bigger_val = bigger_val - bigger_val % 10; //subtract remainder
+    let board =  document.getElementById(div_name);
+    board.style.width = `${bigger_val}px`;
+    board.style.height = `${bigger_val}px`;
+
+    let one_box_size = Math.floor((bigger_val / board_size) / 2) + "px";
+    board.querySelectorAll("div.chess_block").forEach(el => el.style.padding = one_box_size);
+}
+/**
+ * Addition function for part 4.2 (chess board) for deleting all chess squares
+ * @param {id of the element in which everything will be deleted} elementId 
+ */
+function remove_old_board(elementId) {
+    // Removes an element from the document
+    var myNode = document.getElementById(elementId);
+    while (myNode.firstChild) {
+    myNode.removeChild(myNode.firstChild);
+  }
+}

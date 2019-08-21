@@ -1,5 +1,31 @@
+ /* Chess board 4.1 */
  canvas {
   /*use background and borders to find your canvas*/
   background-color: rgba(200, 200, 200, 0.2);
   border: black solid 1px;
 }
+/*--end Chess board 4.1--*/
+
+
+/* Chess board 4.2 */
+#chess_board_div {
+  display: block;
+  line-height: 0;
+  width: 0;
+  height: 0;
+}
+.chess_block {
+  display: inline-block;
+  padding: 10px;
+  /* margin-bottom: -4px; */
+  width: auto;
+  height: auto; 
+}
+.black {
+  background-color: black;
+  color: white;
+}
+.white {
+  background-color: rgb(245, 168, 24);
+}
+/*--end of chess board 4.2--*/
