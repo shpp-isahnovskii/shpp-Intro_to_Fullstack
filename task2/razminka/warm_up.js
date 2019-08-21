@@ -320,3 +320,8 @@ function remove_old_board(elementId) {
   }
 }
 //-------------- end of Part 4.2 ----------------
+
+/**
+ * Part 5
+ * 
+ */
