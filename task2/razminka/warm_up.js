@@ -279,32 +279,34 @@ function draw_div_board() {
       }
       document.getElementById("chess_board_div").appendChild(new_div);
     }
-  document.getElementById("chess_board_div").appendChild(document.createElement("br"));
+  //document.getElementById("chess_board_div").appendChild(document.createElement("br"));
   }
   set_board_size("chess_board_div", board_size); // "chess_board_div" - id of the div  that response for size of the board
 }
 
 /**
  * Function build board inside the tag
- * @param {id wrapper of the board. Board will be spawn in it} div_name 
- * @param {size of the board} board_size 
+ * @param {id wrapper of the board. Board will be spawn in it} parent_div_name 
+ * @param {size of the board} board_size from User input. for Example "8" - amount of sqares at each side
  */
-function set_board_size(div_name, board_size) {
+function set_board_size(parent_div_name, board_size) {
   /*get window size width and height*/
-  let bigger_val = window.innerWidth; 
-  let lower_val = window.innerHeight;
+  let window_x = window.innerWidth; 
 
-    if(bigger_val < lower_val) {
-      [bigger_val, lower_val] = [lower_val, bigger_val];
-    }
-    bigger_val *= 0.8; // wanna get 80% of the min width
-    bigger_val = bigger_val - bigger_val % 10; //subtract remainder
-    let board =  document.getElementById(div_name);
-    board.style.width = `${bigger_val}px`;
-    board.style.height = `${bigger_val}px`;
+    window_x *= 0.8; // wanna get 80% of the max width
 
-    let one_box_size = Math.floor((bigger_val / board_size) / 2) + "px";
-    board.querySelectorAll("div.chess_block").forEach(el => el.style.padding = one_box_size);
+    let one_box_size = Math.floor(window_x / board_size / 2);  //  /2 because I use padding for build board and i need a whole number to *2 it again. Example: side is 11, if I get 11/2 padding without floor it will be 5.5 - i dont need that val.
+    console.log("TCL: functionset_board_size -> one_box_size", one_box_size)
+    let chess_box_size = (one_box_size * 2 * board_size);
+    console.log("TCL: functionset_board_size -> chess_box_size", chess_box_size)
+
+    let board =  document.getElementById(parent_div_name); 
+
+
+    board.style.width = `${chess_box_size}px`;
+    board.style.height = `${chess_box_size}px`;
+
+    board.querySelectorAll("div.chess_block").forEach(el => el.style.padding = one_box_size +"px");
 }
 /**
  * Addition function for part 4.2 (chess board) for deleting all chess squares
@@ -317,3 +319,4 @@ function remove_old_board(elementId) {
     myNode.removeChild(myNode.firstChild);
   }
 }
+//-------------- end of Part 4.2 ----------------
