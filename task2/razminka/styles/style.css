@@ -1,0 +1,91 @@
+body {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+}
+article {
+  background-color: rgb(220, 238, 240);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-family: "Josefin Slab", serif;
+}
+h3 {
+  font-family: "Raleway", sans-serif;
+  margin: 0 0 25px 0;
+}
+input {
+  display: block;
+  height: 20px;
+  border-radius: 4px;
+  outline: none;
+  border: 0px;
+  margin-bottom: 4px;
+  padding-left: 5px;
+}
+
+span {
+  display: block;
+  min-height: 22px;
+  font-size: 16px;
+  padding-left: 5px;
+}
+.btn {
+  display: inline-block;
+  background-color: white;
+  text-align: center;
+  width: 78px;
+  height: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Chess board 4.1 */
+canvas {
+  /*use background and borders to find your canvas*/
+  background-color: rgba(200, 200, 200, 0.2);
+  border: black solid 1px;
+}
+
+/* Chess board 4.2 */
+#chess_board_div {
+  display: flex;
+  flex-wrap: wrap;
+}
+.chess_block {
+  padding: 11px;
+  width: 0;
+  height: 0;
+}
+.black {
+  background-color: black;
+  color: white;
+}
+.white {
+  background-color: rgb(245, 168, 24);
+}
+
+/*Part 5 - IP and Password*/
+.row_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.row_wrapper div{
+  margin-right: 50px;
+}
+.text_to_links {
+  border-radius: 4px;
+  outline: none;
+  resize: horizontal;
+  display: block;
+  margin-bottom: 8px;
+}
+.onfocus {
+  border: solid rgb(146, 219, 146) 1px;
+}
+.onblur {
+  border: solid rgb(85, 158, 253) 1px;
+}

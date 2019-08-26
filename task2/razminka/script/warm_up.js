@@ -221,7 +221,7 @@ function draw_canvas() {
   if (canvas.getContext) { //if browser support canvas
     
     ctx = canvas.getContext('2d'); //add drawing context
-    document.getElementById("btn_draw_board").style.display = "block";//display hidden element
+    document.getElementById("btn_draw_board").style.display = "block";//display hidden element <!>
 
   } else {
     alert("your browser don't support the canvas");
@@ -264,10 +264,9 @@ function draw_board() {
 function draw_div_board() {
 
   let board_size = document.getElementById("get_board_size").value; // get size of the board (n * n)
+  let board = document.getElementById("chess_board_div");
 
-  if(document.getElementById("chess_board_div").firstChild) { //if something inside. Means if board was built once then remove it
-    remove_old_board("chess_board_div");
-  }
+    remove_child_elements(board); //if something inside. Means if board was built once then remove it
   
   for(let i = 0; i < board_size; i++) {
     for(let j = 0; j < board_size; j++) {
@@ -277,11 +276,11 @@ function draw_div_board() {
       } else {
         new_div.setAttribute("class", "white chess_block");
       }
-      document.getElementById("chess_board_div").appendChild(new_div);
+      board.appendChild(new_div);
     }
   //document.getElementById("chess_board_div").appendChild(document.createElement("br"));
   }
-  set_board_size("chess_board_div", board_size); // "chess_board_div" - id of the div  that response for size of the board
+  set_board_size(board, board_size); // "chess_board_div" - id of the div  that response for size of the board
 }
 
 /**
@@ -289,39 +288,102 @@ function draw_div_board() {
  * @param {id wrapper of the board. Board will be spawn in it} parent_div_name 
  * @param {size of the board} board_size from User input. for Example "8" - amount of sqares at each side
  */
-function set_board_size(parent_div_name, board_size) {
+function set_board_size(board, board_size) {
   /*get window size width and height*/
   let window_x = window.innerWidth; 
 
     window_x *= 0.8; // wanna get 80% of the max width
 
     let one_box_size = Math.floor(window_x / board_size / 2);  //  /2 because I use padding for build board and i need a whole number to *2 it again. Example: side is 11, if I get 11/2 padding without floor it will be 5.5 - i dont need that val.
-    console.log("TCL: functionset_board_size -> one_box_size", one_box_size)
+
     let chess_box_size = (one_box_size * 2 * board_size);
-    console.log("TCL: functionset_board_size -> chess_box_size", chess_box_size)
-
-    let board =  document.getElementById(parent_div_name); 
-
 
     board.style.width = `${chess_box_size}px`;
     board.style.height = `${chess_box_size}px`;
 
     board.querySelectorAll("div.chess_block").forEach(el => el.style.padding = one_box_size +"px");
 }
-/**
- * Addition function for part 4.2 (chess board) for deleting all chess squares
- * @param {id of the element in which everything will be deleted} elementId 
- */
-function remove_old_board(elementId) {
-    // Removes an element from the document
-    var myNode = document.getElementById(elementId);
-    while (myNode.firstChild) {
-    myNode.removeChild(myNode.firstChild);
+
+
+function remove_child_elements(node) {
+    if(node.firstChild) {
+      while (node.firstChild) {
+      node.removeChild(node.firstChild);
+    }
   }
 }
+
 //-------------- end of Part 4.2 ----------------
 
 /**
  * Part 5
- * 
+ * A User inputs any number of links and IP addresses separated by a comma. 
+ * If text-area becomes not active: return all valid links, sorted by alphabet. 
+ * Each link opens in a new window.
  */
+
+/*If user click mouse outside from textarea, then we execute */
+text_to_links.onblur = function() {
+  if (this.classList.contains('onfocus')) {
+    this.classList.remove('onfocus');
+    make_link_list(text_to_links.value);
+  }
+  text_to_links.classList.add('onblur');
+};
+text_to_links.onfocus = function() {
+  if (this.classList.contains('onblur')) {
+    this.classList.remove('onblur');
+  }
+  text_to_links.classList.add('onfocus');
+};
+
+function make_link_list() {
+  let ip_list = document.getElementById("ip_output");
+  let link_list = document.getElementById("link_output");
+  
+  remove_child_elements(ip_list);
+  remove_child_elements(link_list);
+
+  let get_text = document.getElementById("text_to_links").value;
+  const IPexp = /((([0-9]){1,3})\.){3}([0-9]){1,3}/g //IP -  max 999.999.999.999
+  const LinkExp = /(https?:\/\/www\.(\w)+\.([A-Za-z]){2,})((\/){1}([\w\-\._~:?#[\]@!\$&'\(\)\*\+,;=.])+)*/g //web links
+
+  let allIP = get_text.match(IPexp);
+  let allLinks = get_text.match(LinkExp);
+
+  list_maker(ip_list, allIP, false);
+  list_maker(link_list, allLinks, true);
+}
+
+function list_maker(parent, data, trigger) {
+  if(data != null) {
+    data.sort();
+    data.forEach(element => {
+      let a = document.createElement("a");
+      a.href = `http://${element}`;
+      a.title = "open this link in new page";
+      if(trigger) {
+        a.text = element.replace(/https?:\/\/www./,'');
+      } else {
+        a.text = element;
+      }
+      a.target="_blank"; //open link in a new page
+      parent.appendChild(a);
+      parent.innerHTML += '<br>';
+    });
+  }
+}
+//-------------- end of Part 5 ----------------
+
+/**
+ * Part 6
+ * User input text in the 'textarea' and the key-word into 'input'. 
+ * Our task is to mark this text inside the textarea.
+ */
+function mark_text() {
+  let text = document.getElementById("text_to_mark");
+  let div_for_text = document.getElementById("div_for_text");
+  let marker = document.getElementById("marker").value;
+  var regex = new RegExp(marker, 'gi');
+  div_for_text.innerHTML = text.value.replace(regex,`<mark>${marker}</mark>`);
+}
