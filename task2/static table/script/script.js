@@ -1,6 +1,6 @@
 //https://www.youtube.com/watch?v=ri5Nqe_IK50  <= here is example what i used for this task
 
-window.onload = () => { tableBuild() };
+window.onload = () => { tableShuffleBy('category') };
 
 //table data
 const GOODS = [
@@ -51,13 +51,14 @@ let currentFieldName = ''; //name of the clicked field in the head of the table
  * @param {name of the clicked field} fieldName 
  */
 function tableShuffleBy(fieldName) {
-
+  
   if(fieldName === currentFieldName) { // check for sort direction if user click twice to the same id
     suffleDirection = !suffleDirection;
   }
 
   tableSortBy(fieldName, suffleDirection);
   tableBuild();
+  addArrow(fieldName, suffleDirection);
 
   currentFieldName = fieldName; // set last clicked id name
 }
@@ -93,4 +94,25 @@ function tableBuild() {
     newTable += `<tr><td>${atribute.category}</td><td>${atribute.name}</td><td>${atribute.amount}</td><td>${atribute.price}</td></tr>`;
   }
   oldTable.innerHTML = newTable;
+}
+
+/**
+ * Function add css class that print ▼ ▲ symbols; 
+ * @param {*} id 
+ * @param {*} arrowup 
+ */
+function addArrow(id, arrowup) {
+  let thead = document.getElementById('tableHead').querySelectorAll('th'); //get all elements 'th' in table head
+  
+  for(element of thead){ //loop through
+    element.className = "noarrow";
+  }
+
+  //select arrow direction
+  if(arrowup) {
+    document.getElementById(id).className = "arrowup";
+  } else {
+    document.getElementById(id).className = "arrowdown";
+  }
+  
 }

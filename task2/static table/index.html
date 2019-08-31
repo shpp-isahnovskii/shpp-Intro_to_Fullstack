@@ -40,12 +40,12 @@
       </div>
       <div class="panel-block">
         <table class="table is-striped is-fullwidth">
-          <thead>
+          <thead id ="tableHead">
             <tr>
-              <th class="sortable" onclick="tableShuffleBy('category')">Category <span class="arrow"></span></th>
-              <th class="sortable" onclick="tableShuffleBy('name')">Name<span class="arrow"></span></th>
-              <th class="sortable" onclick="tableShuffleBy('amount')">Amount<span class="arrow"></span></th>
-              <th class="sortable" onclick="tableShuffleBy('price')">Price<span class="arrow"></span></th>
+              <th id="category" onclick="tableShuffleBy(id)">Category<span></span></th>
+              <th id="name" onclick="tableShuffleBy(id)">Name<span></span></th>
+              <th id="amount" onclick="tableShuffleBy(id)">Amount<span></span></th>
+              <th id="price" onclick="tableShuffleBy(id)">Price<span></span></th>
             </tr>
           </thead>
           <tbody id="tableBody">
@@ -82,6 +82,5 @@
   </section>
   
   <script type="text/javascript"  src="./script/script.js"></script>
-  <script type="text/jsvascript" src ="./script/add-remove-arrows.js"></script>
 </body>
 </html>

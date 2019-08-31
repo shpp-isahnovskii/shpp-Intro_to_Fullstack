@@ -1,0 +1,6 @@
+.arrowdown span::before {
+    content: ' ▼';
+}
+.arrowup span::before {
+    content: ' ▲';
+}
