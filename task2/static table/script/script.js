@@ -44,30 +44,42 @@ const GOODS = [
 
 let FILTRED_GOODS = [];//changing table data
 
-let suffleDirection = false; //normal or reverse sort
-let currentFieldName = ''; //name of the clicked field in the head of the table
-
 /**
  * ----------- Main function -----------
- * get name of the field > look if need reverse > make sort by current field > rebuild table > bind reverse sort trigger to current field name ?????????
+ * 
  * @param {name of the clicked field} fieldName 
  */
 function tableShuffleBy(fieldName) {
   
-  if(fieldName === currentFieldName) { // check for sort direction if user click twice to the same id
-    suffleDirection = !suffleDirection;
-  }
-
-  getSelectCategory();
-  tableSortBy(FILTRED_GOODS, fieldName, suffleDirection);
+  categoryFilter();
+  nameFilter();  //name filter has a bug. If press shift or someting i have aditional free filter action :(
+  addArrow(fieldName);
+  tableSort(FILTRED_GOODS, fieldName, suffleReverse); // suffleReverse - global let. Can be true or false
   tableBuild(FILTRED_GOODS);
-  addArrow(fieldName, suffleDirection);
   getCost(FILTRED_GOODS);
 
-  currentFieldName = fieldName; // set last clicked id name
+}
+
+/**
+ * Sort table and dont change direction of the sort. Used in filters: 'by category' , 'name filter'.
+ */
+function tableShuffle() {
+  categoryFilter();
+  nameFilter();
+  tableBuild(FILTRED_GOODS);
+  getCost(FILTRED_GOODS);
 }
 
 
+/**
+ * ----------- Filter by Name -----------
+ */
+function nameFilter() {
+  let input = document.getElementById('nameSearch').value.toLowerCase();
+  if(input != '') {
+    FILTRED_GOODS = FILTRED_GOODS.filter( (item) => item.name.toLowerCase().search(input) >= 0 ); // for .search in nothing was found => return -1
+  }
+}
 
 /**
  * ----------- Sort -----------
@@ -75,7 +87,7 @@ function tableShuffleBy(fieldName) {
  * @param {table wil be sorted by this field} fieldName 
  * @param {reverse option} reverse 
  */
-function tableSortBy(table, fieldName, reverse) {
+function tableSort(table, fieldName, reverse) {
 
   /* result1,2 used for reverse sort*/
   let result1 = -1;
@@ -84,8 +96,7 @@ function tableSortBy(table, fieldName, reverse) {
     if(reverse) {
       [result1, result2] = [result2, result1];
     }
-
-    table.sort((a,b) => (a[fieldName] < b[fieldName] ? result1 : a[fieldName] > b[fieldName] ? result2 : 0) );  
+    table.sort((a,b) => (a[fieldName] < b[fieldName] ? result1 : a[fieldName] > b[fieldName] ? result2 : 0) );
 }
 
 /** 
@@ -104,10 +115,10 @@ function tableBuild(table) {
 }
 
 /** 
- * ----------- Filter -----------
+ * ----------- Category Filter -----------
  * Get inside of each '0' element of the table and search for category selected value
  */
-function getSelectCategory() {
+function categoryFilter() {
   let selectedValue = document.getElementById('selectionList').value;
 
   if(selectedValue == "") { //if value is empty - filter is not needed
@@ -130,23 +141,32 @@ function getCost(table) {
 }
 
 
+let suffleReverse = false; //normal or reverse sort direction
+let lastId = 'category'; //name of the clicked field in the head of the table. 'category' by default
 /** 
  * ----------- arrows ▼ ▲-----------
  * Function add css class that print ▼ ▲ symbols; 
  * @param {current HTML id} id 
- * @param {boolean for arrow} arrowup 
+ * @param {boolean for arrow} reverse
  */
-function addArrow(id, arrowup) {
+function addArrow(id) {
   let thead = document.getElementById('tableHead').querySelectorAll('th'); //get all elements 'th' in table head
   
   for(element of thead){ //loop through
     element.className = "noarrow";
   }
 
-  if(arrowup) {
+  if(lastId == id) { //change arrow direction if last click has same id sa previous
+    suffleReverse = !suffleReverse;
+  } else {
+    suffleReverse = false;
+  }
+
+  if(suffleReverse) {
     document.getElementById(id).className = "arrowup";
   } else {
     document.getElementById(id).className = "arrowdown";
   }
-  
+
+  lastId = id; //new id for the next comparing
 }

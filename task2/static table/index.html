@@ -20,13 +20,13 @@
           <div class="field-body">
             <div class="field">
               <p class="control">
-                <input class="input" type="text" placeholder="Search by name">
+                <input id="nameSearch" onkeyup="tableShuffle()" class="input" type="text" placeholder="Search by name">
               </p>
             </div>
             <div class="field">
               <p class="control">
                 <div class="select" style="width: 100%">
-                  <select id="selectionList" placeholder="Filter by category" onchange="getSelectCategory(), tableShuffleBy('category')" style="width: 100%">
+                  <select id="selectionList" placeholder="Filter by category" onchange="tableShuffle()" style="width: 100%">
                     <option value="" selected>Filter by category</option>
                     <option value="supplies">Office supplies</option>
                     <option value="furniture">Furniture</option>
@@ -42,7 +42,7 @@
         <table class="table is-striped is-fullwidth">
           <thead id ="tableHead">
             <tr>
-              <th id="category" onclick="tableShuffleBy(id)">Category<span></span></th>
+              <th id="category" onclick="tableShuffleBy(id)" class="arrowdown" >Category<span></span></th>
               <th id="name" onclick="tableShuffleBy(id)">Name<span></span></th>
               <th id="amount" onclick="tableShuffleBy(id)">Amount<span></span></th>
               <th id="price" onclick="tableShuffleBy(id)">Price<span></span></th>
