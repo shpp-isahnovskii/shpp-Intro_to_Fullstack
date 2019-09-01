@@ -4,3 +4,7 @@
 .arrowup span::before {
     content: ' ▲';
 }
+.noarrow span::before {
+    content: ' ▼';
+    visibility: hidden;
+}
