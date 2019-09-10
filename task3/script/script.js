@@ -25,24 +25,26 @@ $(document).ready(
  function() {
   tableBuild(users);
   clickListener();
-  
 });
 
 function clickListener() {
   $('.option').click( function() {
 
-    if($(this).hasClass('active')) {
-      $('.dropdown').removeClass('dropdown');
-      $(this).removeClass('active');
+    $('.removeMe span').slideToggle(); //arrow hide animation
 
+    let hasActive = $(this).hasClass('active');
+    if(hasActive) {
+      $('.option:not(.active)').slideToggle();
+      $(this).toggleClass('active');
+      
     } else {
-
-      $('ul').addClass('dropdown');
-      $(this).addClass('active');
+      $('.removeMe').remove();
+      $(this).toggleClass('active');
+      $('.option:not(.active)').slideToggle();
       addIndexesToOuterElement(this);
-      $(this).css("order", '-1');
-
+      $(this).css('order', '-1');
     }
+    
   });
 }
 
@@ -56,12 +58,12 @@ function addIndexesToOuterElement(child) {
   });
 }
 
-
 function tableBuild(table) {
   let fragment = document.createDocumentFragment();
+  $(fragment).append(`<li class="option removeMe" style="order: -1"><div>Select Friend<span>▼</span></div></li>`);
   table.forEach( function(element, index) {
-    $(fragment).append(`<li class="option" style="order:${index}"><img src="${element.link}"><div>${element.name}</div></li>`);
+    $(fragment).append(`<li class="option" style="order:${index}; display:none"><img src="${element.link}"><div>${element.name}</div></li>`);
   });
-  $('.dropdown').append(fragment);
+  $('.dropdownMenu').append(fragment);
   $(fragment).first($('.option:first-child').addClass('active'));
 }
