@@ -1,0 +1,198 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.2;
+}
+body {
+  margin: 0;
+}
+li {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: #333333;
+}
+
+section {
+  text-align: center;
+}
+
+header {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+header ul {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+}
+header ul li {
+  padding-right: 50px;
+  text-transform: uppercase;
+}
+header ul li a {
+  font-size: 18px;
+  color: #757575;
+}
+
+.logo a {
+  margin-left: 50px;
+  font-size: 48px;
+  font-weight: bold;
+  color: #333333;
+}
+.plus-color {
+  font-size: 48px;
+  color: #1abc9c;
+}
+.n-color {
+  letter-spacing: 8px;
+}
+
+.app-review {
+  display: flex;
+  justify-content: space-around;
+  background-color: #1abc9c;
+  padding: 34px 0 24px 0;
+
+}
+
+.app-review_right-side,
+.app-review_left-side {
+  display: block;
+  width: 50%;
+}
+.app-review_left-side img {
+  max-width: 95%;
+}
+
+.app-review_right-side {
+  text-align: left;
+  color: #ffffff;
+}
+.app-review_right-side p,
+.app-review_right-side h1 {
+  max-width: 80%;
+  text-align: justify;
+  padding-bottom: 30px;
+}
+.app-review_right-side h1 {
+  font-size: 28px;
+}
+.app-review_right-side p {
+  font-size: 20px;
+}
+
+.big_button {
+  margin-top: 40px;
+  border: 2px solid #ffffff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 10px 20px;
+  width: 140px;
+  cursor: pointer;
+}
+.big_button a {
+  color: #ffffff;
+}
+
+.big_button:hover {
+  background-color: #ffffff;
+}
+.big_button:hover > a {
+  color: #16a085;
+}
+
+.our-development {
+  margin: 20px 0;
+  display: flex;
+}
+.dev {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 28px;
+}
+
+.registration-form {
+  background-color: #16a085;
+  padding-bottom: 40px;
+}
+
+.registration-form h2 {
+  padding-top: 30px;
+  color: #ffffff;
+}
+
+i {
+  color: #ffffff;
+}
+.icon {
+  padding: 16px 0;
+  background-color: #1abc9c;
+  overflow: hidden;
+  width: 85px;
+  border-radius: 50%;
+}
+.dev p {
+  margin: 0;
+}
+.icon img {
+  height: 45px;
+  filter: invert(1);
+}
+.registration-form form input,
+textarea {
+  padding: 4px;
+  margin-top: 8px;
+  height: 30px;
+  width: 600px;
+}
+textarea {
+  resize: vertical;
+  height: 600px;
+}
+.registration-form form input[type="submit"] {
+  margin-top: 40px;
+  height: 40px;
+  width: 160px;
+  background-color: #16a085;
+  color: white;
+  border: 2px solid white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+.registration-form form input[type="submit"]:hover {
+  background-color: #ffffff;
+  color: #16a085;
+}
+
+.button-up {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(250,250,250, 0.5);
+  border-radius: 50%;
+  color: rgba(250,250,250, 0.5);
+  float: right;
+  left: -30px;
+  bottom: 30px;
+}
+.button-up span::before {
+  content: '➤';
+}
+.button-up span {
+  color: white;
+  position: absolute;
+  display: inline-block;
+  top: 8px;
+  left: 12px;
+  transform: rotate(-90deg);
+}
