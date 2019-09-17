@@ -34,7 +34,7 @@ function sum_of_num() {
 
   for (let i = 0; i <= index; i++) {
     remainder = Math.abs(counter % 10);
-    if (remainder == 2 || remainder == 3 || remainder == 7) { //check if val ends for 2, 3, 7
+    if (remainder === 2 || remainder === 3 || remainder === 7) { //check if val ends for 2, 3, 7
       sum += counter;
     }
     counter++;
@@ -44,7 +44,7 @@ function sum_of_num() {
 
 //reset calculated values
 function reset() {
-  if (document.getElementById("sum_of_two").value != "") {
+  if (!document.getElementById("sum_of_two").value) {
     document.getElementById("sum_num_1").value = "";
     document.getElementById("sum_num_2").value = "";
     document.getElementById("sum_of_two").innerHTML = "";
@@ -250,7 +250,7 @@ function draw_board() {
   //cycle to buils a chess board
   for (let y = 0; y < cols; y++) {
     for (let x = 0; x < rows; x++) {
-      if ((x + y) % 2 == 0) {
+      if ((x + y) % 2 === 0) {
         ctx.fillRect(x * square_size, y * square_size, square_size, square_size);//coordinates (x, y, width, height)
       }
     }
@@ -346,7 +346,7 @@ function make_link_list() {
 
   let get_text = document.getElementById("text_to_links").value;
   const IPexp = /((([0-9]){1,3})\.){3}([0-9]){1,3}/g //IP -  max 999.999.999.999
-  const LinkExp = /(https?:\/\/www\.(\w)+\.([A-Za-z]){2,})((\/){1}([\w\-\._~:?#[\]@!\$&'\(\)\*\+,;=.])+)*/g //web links
+  const LinkExp = /(https?:\/\/(www\.)*(\w)+([\.A-Za-z]){2,})((\/){1}([\w\-\._~:?#[\]@!\$&'\(\)\*\+,;=.])+)*/g //web links
 
   let allIP = get_text.match(IPexp);
   let allLinks = get_text.match(LinkExp);
