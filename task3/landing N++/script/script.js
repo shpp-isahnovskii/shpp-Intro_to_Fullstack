@@ -3,13 +3,21 @@
 //https://jsfiddle.net/L02tck8x/
 
 
+
+const page = $("html, body");
+
 $(document).ready(function () {
   
   $("#main-nav, .button-up").on("click", "a", function (event) {
 
-    event.preventDefault();
+    //found solution to stop scroling if user start's do something else: https://stackoverflow.com/questions/18445590/jquery-animate-stop-scrolling-when-user-scrolls-manually
+    page.on("scroll mousedown wheel DOMMouseScroll mousewheel keyup touchmove", function(){
+      page.stop();
+    });
+
+    //event.preventDefault();
     const element = $(this).attr('href');
-    let offest = $(element).offset().top;
+    const offest = $(element).offset().top;
 
     const actualOffset = (element != '#about') ? offest : (Math.floor(offest / 2)); 
 

@@ -1,4 +1,4 @@
-let users = [
+const users = [
   {
     name: 'Smith',
     link: './images/0.png'
@@ -27,18 +27,19 @@ $(document).ready(
   clickListener();
 });
 
+
 function clickListener() {
   $('.option').click( function() {
 
-    $('.removeMe span').slideToggle(); //arrow hide animation
+    $('.removeMe').slideToggle(); // 'select friend' arrow - hide animation
 
-    let hasActive = $(this).hasClass('active');
-    if(hasActive) {
+    /*toggle for active class*/
+    if($(this).hasClass('active')) { 
       $('.option:not(.active)').slideToggle();
       $(this).toggleClass('active');
       
     } else {
-      $('.removeMe').remove();
+      $('.removeMe').remove(); //remove 'select friend' forever
       $(this).toggleClass('active');
       $('.option:not(.active)').slideToggle();
       addIndexesToOuterElement(this);
@@ -49,9 +50,9 @@ function clickListener() {
 }
 
 function addIndexesToOuterElement(child) {
-  let parent = $(child).parent(child).find('li');
+  const parent = $(child).parent(child).find('li');
   $(parent).each( function(index, element) {
-    let order = $(element).css('order');
+    const order = $(element).css('order');
     if(order !== $(child).css('order')) {
       $(element).css('order', index);
     }

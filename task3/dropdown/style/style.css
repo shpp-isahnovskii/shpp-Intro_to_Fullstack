@@ -1,3 +1,6 @@
+.dropdownMenuWrapper {
+  position: absolute;
+}
 .dropdownMenu {
   display: flex;
   padding: 1px;

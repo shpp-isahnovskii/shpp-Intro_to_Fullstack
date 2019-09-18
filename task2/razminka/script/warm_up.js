@@ -15,8 +15,8 @@ input.addEventListener("keyup", function (event) {
  */
 function sum_of_num() {
 
-  let a = parseInt(document.getElementById("sum_num_1").value); //first input
-  let b = parseInt(document.getElementById("sum_num_2").value); //second input
+  const a = parseInt(document.getElementById("sum_num_1").value); //first input
+  const b = parseInt(document.getElementById("sum_num_2").value); //second input
 
   let index; //start value
   let counter; //counter from start value to end of cycle
@@ -66,9 +66,9 @@ function reset() {
  */
 function to_time_convert() {
 
-  let input_seconds = document.getElementById("get_seconds").value;
+  const input_seconds = document.getElementById("get_seconds").value;
 
-  let regExp = /^([0-9]+)$/
+  const regExp = /^([0-9]+)$/
 
   if (!input_seconds.match(regExp)) { //validation for numbers only in the input
 
@@ -90,20 +90,20 @@ function to_time_convert() {
  * 2. Function convert user input hh:mm:ss to the number amount of seconds in that input
  */
 function to_seconds_convert() {
-  let input_time = document.getElementById("get_time").value;
+  const input_time = document.getElementById("get_time").value;
 
   /*Correct input regExp example: https://stackoverflow.com/questions/8318236/regex-pattern-for-hhmmss-time-string 
    *regExp builder: https://regexr.com/
    */
-  let regExp = /^([0-9]+)((:[0-5][0-9]){2})$/ //correct input for this form looks like this:  0:59:59
+  const regExp = /^([0-9]+)((:[0-5][0-9]){2})$/ //correct input for this form looks like this:  0:59:59
 
   if (!input_time.match(regExp)) { //if not mach
 
     alert("Something being wrong.\nPlease use text in format: hh:mm:ss");
 
   } else {
-    let split_time = input_time.split(':');
-    let seconds = (+split_time[0]) * 60 * 60 + (+split_time[1]) * 60 + (+split_time[2]); //transform hours to minutes then to seconds + min to sec + sec
+    const split_time = input_time.split(':');
+    const seconds = (+split_time[0]) * 60 * 60 + (+split_time[1]) * 60 + (+split_time[2]); //transform hours to minutes then to seconds + min to sec + sec
 
     document.getElementById("set_seconds").innerHTML = seconds;
   }
@@ -119,8 +119,8 @@ function dates_difference() {
   //let split = /-|:|T/;
   //                    YYYY MM DD HH MM
   //Date input example: 4556-12-23T19:08
-  let first_date = new Date(document.getElementById("get_datetime_one").value + "Z");
-  let second_date = new Date(document.getElementById("get_datetime_two").value + "Z");
+  const first_date = new Date(document.getElementById("get_datetime_one").value + "Z");
+  const second_date = new Date(document.getElementById("get_datetime_two").value + "Z");
 
   if ((first_date == "Invalid Date") || (second_date == "Invalid Date")) {
     alert("Invalid input.\nMake sure what all entered values are correct");
@@ -147,7 +147,7 @@ function date_calculation(d1, d2) {
       result[i + 1]--; //minus 1 value to the next value in the array
     }
   }
-  document.getElementById("set_new_date").innerHTML = "seconds(" + result[0] + "), " + "minutes(" + result[1] + "), " + "hours(" + result[2] + "), " + "days(" + result[3] + "), " + "months(" + result[4] + "), " + "years(" + result[5] + ").";
+  document.getElementById("set_new_date").innerHTML = ` ${result[0]} seconds, ${result[1]} minutes, ${result[2]} hours, ${result[3]} days, ${result[4]} months, ${result[5]} years.`;
 }
 
 /**
@@ -235,17 +235,17 @@ function draw_canvas() {
  */
 function draw_board() {
 
-  let rows = +document.getElementById("get_chess_x").value; //add "+" symbol before to transform string into int
-  let cols = +document.getElementById("get_chess_y").value;
+  const rows = +document.getElementById("get_chess_x").value; //add "+" symbol before to transform string into int
+  const cols = +document.getElementById("get_chess_y").value;
   
-  let canva_height = canvas.height;
-  let canva_width = canvas.width;
+  const canva_height = canvas.height;
+  const canva_width = canvas.width;
 
   ctx.clearRect(0, 0, canva_width, canva_height);//clear canvas
 
-  let max_size = cols >= rows ? cols : rows; //take maxi value to calculete size of the squares from this value
+  const max_size = cols >= rows ? cols : rows; //take maxi value to calculete size of the squares from this value
 
-  let square_size = Math.sqrt((canva_height * canva_width) / (max_size * max_size)); // one square width or heigth size
+  const square_size = Math.sqrt((canva_height * canva_width) / (max_size * max_size)); // one square width or heigth size
 
   //cycle to buils a chess board
   for (let y = 0; y < cols; y++) {
@@ -263,9 +263,11 @@ function draw_board() {
  */
 function draw_div_board() {
 
-  let board_size = document.getElementById("get_board_size").value; // get size of the board (n * n)
-  let board = document.getElementById("chess_board_div");
+  const board_size = document.getElementById("get_board_size").value; // get size of the board (n * n)
+  const board = document.getElementById("chess_board_div");
 
+  let chessBlock = document.createDocumentFragment();
+  
     remove_child_elements(board); //if something inside. Means if board was built once then remove it
   
   for(let i = 0; i < board_size; i++) {
@@ -276,9 +278,9 @@ function draw_div_board() {
       } else {
         new_div.setAttribute("class", "white chess_block");
       }
-      board.appendChild(new_div);
+      chessBlock.appendChild(new_div);
     }
-  //document.getElementById("chess_board_div").appendChild(document.createElement("br"));
+    board.appendChild(chessBlock);
   }
   set_board_size(board, board_size); // "chess_board_div" - id of the div  that response for size of the board
 }
@@ -294,9 +296,9 @@ function set_board_size(board, board_size) {
 
     window_x *= 0.8; // wanna get 80% of the max width
 
-    let one_box_size = Math.floor(window_x / board_size / 2);  //  /2 because I use padding for build board and i need a whole number to *2 it again. Example: side is 11, if I get 11/2 padding without floor it will be 5.5 - i dont need that val.
+    const one_box_size = Math.floor(window_x / board_size / 2);  //  /2 because I use padding for build board and i need a whole number to *2 it again. Example: side is 11, if I get 11/2 padding without floor it will be 5.5 - i dont need that val.
 
-    let chess_box_size = (one_box_size * 2 * board_size);
+    const chess_box_size = (one_box_size * 2 * board_size);
 
     board.style.width = `${chess_box_size}px`;
     board.style.height = `${chess_box_size}px`;
@@ -338,18 +340,18 @@ text_to_links.onfocus = function() {
 };
 
 function make_link_list() {
-  let ip_list = document.getElementById("ip_output");
-  let link_list = document.getElementById("link_output");
+  const ip_list = document.getElementById("ip_output");
+  const link_list = document.getElementById("link_output");
   
   remove_child_elements(ip_list);
   remove_child_elements(link_list);
 
-  let get_text = document.getElementById("text_to_links").value;
+  const get_text = document.getElementById("text_to_links").value;
   const IPexp = /((([0-9]){1,3})\.){3}([0-9]){1,3}/g //IP -  max 999.999.999.999
   const LinkExp = /(https?:\/\/(www\.)*(\w)+([\.A-Za-z]){2,})((\/){1}([\w\-\._~:?#[\]@!\$&'\(\)\*\+,;=.])+)*/g //web links
 
-  let allIP = get_text.match(IPexp);
-  let allLinks = get_text.match(LinkExp);
+  const allIP = get_text.match(IPexp);
+  const allLinks = get_text.match(LinkExp);
 
   list_maker(ip_list, allIP, false);
   list_maker(link_list, allLinks, true);
@@ -363,7 +365,7 @@ function list_maker(parent, data, trigger) {
       a.href = `http://${element}`;
       a.title = "open this link in new page";
       if(trigger) {
-        a.text = element.replace(/https?:\/\/www./,'');
+        a.text = element.replace(/https?:\/\/(www.)*/,'');
       } else {
         a.text = element;
       }
@@ -382,8 +384,8 @@ function list_maker(parent, data, trigger) {
  */
 function mark_text() {
   let text = document.getElementById("text_to_mark");
-  let div_for_text = document.getElementById("div_for_text");
-  let marker = document.getElementById("marker").value;
+  const div_for_text = document.getElementById("div_for_text");
+  const marker = document.getElementById("marker").value;
   var regex = new RegExp(marker, 'gi');
   div_for_text.innerHTML = text.value.replace(regex,`<mark>${marker}</mark>`);
 }

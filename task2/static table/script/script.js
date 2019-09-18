@@ -75,8 +75,8 @@ function tableShuffle() {
  * ----------- Filter by Name -----------
  */
 function nameFilter() {
-  let input = document.getElementById('nameSearch').value.toLowerCase();
-  if(input != '') {
+  const input = document.getElementById('nameSearch').value.toLowerCase();
+  if(input) {
     FILTRED_GOODS = FILTRED_GOODS.filter( (item) => item.name.toLowerCase().search(input) >= 0 ); // for .search in nothing was found => return -1
   }
 }
@@ -119,12 +119,13 @@ function tableBuild(table) {
  * Get inside of each '0' element of the table and search for category selected value
  */
 function categoryFilter() {
-  let selectedValue = document.getElementById('selectionList').value;
+  const selectedValue = document.getElementById('selectionList').value;
 
-  if(selectedValue == "") { //if value is empty - filter is not needed
+  if(!selectedValue) { //if value is empty - filter is not needed
     FILTRED_GOODS = GOODS;
   } else {
     FILTRED_GOODS = GOODS.filter( (item)=> { return Object.entries(item)[0][1] == selectedValue;}); //0 - category, 1 - category name
+
   }
 }
 
@@ -150,7 +151,7 @@ let lastId = 'category'; //name of the clicked field in the head of the table. '
  * @param {boolean for arrow} reverse
  */
 function addArrow(id) {
-  let thead = document.getElementById('tableHead').querySelectorAll('th'); //get all elements 'th' in table head
+  const thead = document.getElementById('tableHead').querySelectorAll('th'); //get all elements 'th' in table head
   
   for(element of thead){ //loop through
     element.className = "noarrow";
