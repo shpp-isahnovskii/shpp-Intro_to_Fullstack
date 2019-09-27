@@ -263,17 +263,42 @@ function draw_board() {
  */
 function draw_div_board() {
 
-  const board_size = document.getElementById("get_board_size").value; // get size of the board (n * n)
+  const board_size = document.getElementById("get_board_size").value.split('x'); // get size of the board (n * n)
   const board = document.getElementById("chess_board_div");
+  
+  remove_child_elements(board); //if something inside. Means if board was built once then remove it
+  
+  const xy = get_xy(board_size);
 
-  let chessBlock = document.createDocumentFragment();
-  
-    remove_child_elements(board); //if something inside. Means if board was built once then remove it
-  
-  for(let i = 0; i < board_size; i++) {
-    for(let j = 0; j < board_size; j++) {
+  build_board(xy[0],xy[1], board); //build it with out the size
+
+  set_board_size(board, xy[0], xy[1]);
+}
+
+
+//get X Y from input values, also throw invalid input in user don't used XxY formating
+function get_xy(board_size) {
+  let xy = [0,0];
+  switch (board_size.length) {
+    case 1: checkNaN(board_size[0]) ? alert('invalid input') : xy[0] = board_size[0], xy[1] = board_size[0];
+    break;
+    case 2: (checkNaN(board_size[0]) || checkNaN(board_size[1]) === true) ? alert('invalid input') : xy[0] = board_size[0], xy[1] = board_size[1];
+    break;
+    default: alert('invalid input');
+    break;
+  }
+  return xy;
+}
+
+//div blocks builder for our chees table
+function build_board(x, y, board) {
+
+  let chessBlock = document.createDocumentFragment(); //create element, it will be fill append to the to the parent board
+
+  for(let i = 0; i < y; i++) {
+    for(let j = 0; j < x; j++) {
       let new_div = document.createElement("div");
-      if( (i + j) % 2) {
+      if( (i + j) % 2 === 0) {
         new_div.setAttribute("class", "black chess_block");
       } else {
         new_div.setAttribute("class", "white chess_block");
@@ -282,7 +307,11 @@ function draw_div_board() {
     }
     board.appendChild(chessBlock);
   }
-  set_board_size(board, board_size); // "chess_board_div" - id of the div  that response for size of the board
+}
+
+// check for NaN
+function checkNaN(argument) {
+  return isNaN(parseInt(argument)) ? true : false;
 }
 
 /**
@@ -290,22 +319,20 @@ function draw_div_board() {
  * @param {id wrapper of the board. Board will be spawn in it} parent_div_name 
  * @param {size of the board} board_size from User input. for Example "8" - amount of sqares at each side
  */
-function set_board_size(board, board_size) {
-  /*get window size width and height*/
-  let window_x = window.innerWidth; 
+function set_board_size(board, x, y) {
+  //get window size width
+  const window_x = window.innerWidth * 0.8; // wanna get 80% of the max width
+    
+  const bigger_value = +x > +y ? x : y; 
 
-    window_x *= 0.8; // wanna get 80% of the max width
+  const one_box_size = Math.floor(window_x / bigger_value / 2);  //  /2 because I use padding for build board and i need a whole number to *2 it again. Example: side is 11, if I get 11/2 padding without floor it will be 5.5 - i dont need that val.
+  
+  board.style.width = `${one_box_size * x * 2}px`;
 
-    const one_box_size = Math.floor(window_x / board_size / 2);  //  /2 because I use padding for build board and i need a whole number to *2 it again. Example: side is 11, if I get 11/2 padding without floor it will be 5.5 - i dont need that val.
-
-    const chess_box_size = (one_box_size * 2 * board_size);
-
-    board.style.width = `${chess_box_size}px`;
-    board.style.height = `${chess_box_size}px`;
-
-    board.querySelectorAll("div.chess_block").forEach(el => el.style.padding = one_box_size +"px");
+  board.style.height = `${one_box_size * y * 2}px`;
+  
+  board.querySelectorAll("div.chess_block").forEach(el => el.style.padding = one_box_size +"px");
 }
-
 
 function remove_child_elements(node) {
     if(node.firstChild) {
@@ -339,42 +366,45 @@ text_to_links.onfocus = function() {
   text_to_links.classList.add('onfocus');
 };
 
-function make_link_list() {
-  const ip_list = document.getElementById("ip_output");
+function make_link_list(get_text) {
+
+  /* first remove old one list*/
   const link_list = document.getElementById("link_output");
-  
-  remove_child_elements(ip_list);
   remove_child_elements(link_list);
 
-  const get_text = document.getElementById("text_to_links").value;
-  const IPexp = /((([0-9]){1,3})\.){3}([0-9]){1,3}/g //IP -  max 999.999.999.999
-  const LinkExp = /(https?:\/\/(www\.)*(\w)+([\.A-Za-z]){2,})((\/){1}([\w\-\._~:?#[\]@!\$&'\(\)\*\+,;=.])+)*/g //web links
+  //add www.links and IPs regExp
+  
+  const IPExp = /((([0-9]){1,3})\.){3}([0-9]){1,3}/g;
+  const LinkExp = /(https?:\/\/(www\.)*(\w)+([\.A-Za-z]){2,})((\/){1}([\w\-\._~:?#[\]@!\$&'\(\)\*\+,;=.])+)*/g;
 
-  const allIP = get_text.match(IPexp);
+  //create new one list
+
+  let allIP = get_text.match(IPExp);
   const allLinks = get_text.match(LinkExp);
 
-  list_maker(ip_list, allIP, false);
-  list_maker(link_list, allLinks, true);
+  if (allIP != null) { //add hhtp to all IP data
+    allIP = allIP.map(n => `http://${n}`);
+  }
+  //make new div with those data
+  list_maker(link_list, allIP);
+  list_maker(link_list, allLinks);
 }
 
-function list_maker(parent, data, trigger) {
-  if(data != null) {
+function list_maker(parent, data) {
+  if(data != null && typeof data[Symbol.iterator] ==='function') { //example how to find iterable function: https://stackoverflow.com/questions/18884249/checking-whether-something-is-iterable
     data.sort();
     data.forEach(element => {
       let a = document.createElement("a");
-      a.href = `http://${element}`;
+      a.href = element;
       a.title = "open this link in new page";
-      if(trigger) {
-        a.text = element.replace(/https?:\/\/(www.)*/,'');
-      } else {
-        a.text = element;
-      }
+      a.text = element.replace(/https?:\/\/(www.)*/,'');
       a.target="_blank"; //open link in a new page
       parent.appendChild(a);
       parent.innerHTML += '<br>';
     });
   }
 }
+
 //-------------- end of Part 5 ----------------
 
 /**
@@ -385,7 +415,10 @@ function list_maker(parent, data, trigger) {
 function mark_text() {
   let text = document.getElementById("text_to_mark");
   const div_for_text = document.getElementById("div_for_text");
-  const marker = document.getElementById("marker").value;
-  var regex = new RegExp(marker, 'gi');
-  div_for_text.innerHTML = text.value.replace(regex,`<mark>${marker}</mark>`);
+  let marker = document.getElementById("marker").value;
+  const shielding = /(\\)|(\.)|(\[)|(\])|(\{)|(\})|(\()|(\))|(\<)|(\>)|(\*)|(\+)|(\-)|(\=)|(\!)|(\?)|(\^)|(\$)/g
+  marker = marker.replace(shielding, '\\$&');
+  
+  const regex = new RegExp(marker, 'gi');
+  div_for_text.innerHTML = text.value.replace(regex,`<mark>$&</mark>`);
 }
