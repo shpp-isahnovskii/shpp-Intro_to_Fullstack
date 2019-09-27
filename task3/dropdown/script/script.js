@@ -30,22 +30,23 @@ $(document).ready(
 
 function clickListener() {
   $('.option').click( function() {
-
-    $('.removeMe').slideToggle(); // 'select friend' arrow - hide animation
-
-    /*toggle for active class*/
-    if($(this).hasClass('active')) { 
-      $('.option:not(.active)').slideToggle();
-      $(this).toggleClass('active');
+    if (!$(':animated').length) {
       
-    } else {
-      $('.removeMe').remove(); //remove 'select friend' forever
-      $(this).toggleClass('active');
-      $('.option:not(.active)').slideToggle();
-      addIndexesToOuterElement(this);
-      $(this).css('order', '-1');
-    }
-    
+      $('.removeMe').slideToggle(); // 'select friend' arrow - hide animation
+
+      /*toggle for active class*/
+      if($(this).hasClass('active')) { 
+        $('.option:not(.active)').slideToggle();
+        $(this).toggleClass('active');
+        
+      } else {
+        $('.removeMe').remove(); //remove 'select friend' forever
+        $(this).toggleClass('active');
+        $('.option:not(.active)').slideToggle();
+        addIndexesToOuterElement(this);
+        $(this).css('order', '-1');
+      }
+    } 
   });
 }
 

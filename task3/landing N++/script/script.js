@@ -2,12 +2,8 @@
 //https://webcomplex.com.ua/jquery/plavnyj-skroll-posle-nazhatiya-na-yakornuyu-ssylku.html
 //https://jsfiddle.net/L02tck8x/
 
-
-
-const page = $("html, body");
-
 $(document).ready(function () {
-  
+  const page = $("html, body");
   $("#main-nav, .button-up").on("click", "a", function (event) {
 
     //found solution to stop scroling if user start's do something else: https://stackoverflow.com/questions/18445590/jquery-animate-stop-scrolling-when-user-scrolls-manually
@@ -21,7 +17,6 @@ $(document).ready(function () {
 
     const actualOffset = (element != '#about') ? offest : (Math.floor(offest / 2)); 
 
-
-    $('body,html').animate({ scrollTop: actualOffset }, 1500);
+    page.animate({ scrollTop: actualOffset }, 1500);
   });
 });
