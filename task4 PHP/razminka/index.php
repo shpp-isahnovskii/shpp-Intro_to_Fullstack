@@ -45,27 +45,25 @@
 
 
   <article>
-    <h3>Part 3</h3>
-    <p>Hey! Here you can download some files.</p>
-    <form action="calculations.php" enctype="multipart/form-data" method="POST">
-      <input type="file" name="file">
-    </form>
-
-    <?php ## PHP автоматически создает переменные при закачке.
-      if (@$_REQUEST['doUpload'])
-      echo '<pre>Содержимое $_FILES: '.print_r($_FILES, true)."</pre><hr/>";
-      ?>
-      Выберите какой-нибудь файл в форме ниже:
-      <form action="<?=$_SERVER['SCRIPT_NAME']?>" method="POST" enctype="multipart/
-      form-data">
-      <input type="file" name="myFile">
-      <input type="submit" name="doUpload" value="Закачать">
-      </form> 
-
-    <span>
-    <?php "hi" ?>
-    </span>
-    
+    <div class="article3-wrap">
+      <div>
+        <h3>Part 3</h3>
+        <p>Hey! Here you can download some files.</p>
+        
+          <form action="calculations.php" enctype="multipart/form-data" method="POST">
+            <input type="hidden" value="task3" name="action">
+            <span>Upload file:</span><input type="file" name="my_file">
+            <br>
+            <input type="submit" value="download" class="btn">
+          </form>
+      </div>
+        <div class="download-box">
+        <?php
+          require './T3listloader.php';
+          echo task3ShowFiles();
+        ?>
+        </div>
+    </div>
   </article>
 
   <article>
@@ -101,8 +99,6 @@
     <div class="btn" onclick="mark_text()">mark</div>
     <div id="div_for_text"></div>
   </article>
-
   <!-- <script src="./script/warm_up.js" onload="draw_canvas()"></script> -->
-</body>
-
+</body>   
 </html>

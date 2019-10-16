@@ -99,3 +99,34 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
     width: 100px;
 }
+
+/*Task#3 download block*/
+.article3-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.download-box {
+  background-color: white;
+  width: 40%;
+  margin-right: 0;
+  border-radius: 8px;
+  padding: 10px;
+  height: 170px;
+  overflow: auto;
+}
+.download-box .file-box {
+  display: flex;
+  margin-bottom: 10px;
+}
+.download-box .file-box:last-child {
+  margin-bottom: 0;
+}
+.download-box .file-box img {
+  width: 100px;
+  border-radius: 8px;
+}
+.download-box .text-box {
+  
+  margin: auto 20px;
+}

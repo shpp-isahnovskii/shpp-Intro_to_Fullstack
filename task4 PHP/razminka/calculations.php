@@ -3,18 +3,18 @@
 session_start();
 
   /* Triggers for different forms */
-  switch (htmlentities($_POST['action'])) { //htmlentities convert all to text. Typical hacker protection
-    case 'task1': task1Sum();
-      break;
-    case 'task2': task2Sum();
-      break;
-    case 'task3': task3Save();
-      break;
-    default:
-      # code...
-      break;
+  if (isset($_POST['action'])) {
+    switch (htmlentities($_POST['action'])) { //htmlentities convert all to text. Typical hacker protection
+      case 'task1': task1Sum();
+        break;
+      case 'task2': task2Sum();
+        break;
+      case 'task3': task3Download();
+        break;
+      default: returnHome();
+        break;
+    }
   }
-
 
   function task1Sum() {
     $a = htmlspecialchars($_POST['val1']) ?: 0;
@@ -47,12 +47,30 @@ session_start();
     returnHome();
   }
 
+  /**
+   * Task 3. File Downloader: 
+   * 1)Adding to the folder; 
+   * 2)download from it.
+   * Complex task. Used few addition function to do it.
+   */
+  function task3Download() {
+    if($_FILES['my_file']['name']) {
+      $dir = 'downloads/';
+      $file = $_FILES['my_file']['name'];
+      $path = pathinfo($file);
+      $filename = $path['filename'];
+      $ext = $path['extension'];
+      $temp_name = $_FILES['my_file']['tmp_name'];
 
-
-
-
+      $path_filename_ext = $dir.$filename.".".$ext;
+      if(!file_exists($path_filename_ext)) { //if file is not exist
+        move_uploaded_file($temp_name, $path_filename_ext); //move it to 'downloads' dir
+      }
+    }
+    returnHome();
+  }
+  
   function returnHome() {
-    //echo "<pre>"; print_r($_SERVER); echo "</pre>";
     header('Location: ' . $_SERVER['HTTP_REFERER']); //$_SERVER['HTTP_REFERER'] not secured!!
   }
 ?>
