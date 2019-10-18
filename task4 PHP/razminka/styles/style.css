@@ -39,33 +39,9 @@ span {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  margin-top: 10px;
   margin-bottom: 10px;
   font-family: "Josefin Slab", serif;
-}
-
-/* Chess board 4.1 */
-canvas {
-  /*use background and borders to find your canvas*/
-  background-color: rgba(200, 200, 200, 0.2);
-  border: black solid 1px;
-}
-
-/* Chess board 4.2 */
-#chess_board_div {
-  display: flex;
-  flex-wrap: wrap;
-}
-.chess_block {
-  padding: 11px;
-  width: 0;
-  height: 0;
-}
-.black {
-  background-color: black;
-  color: white;
-}
-.white {
-  background-color: rgb(245, 168, 24);
 }
 
 /*Part 5 - IP and Password*/
@@ -78,11 +54,9 @@ canvas {
   margin-right: 50px;
 }
 .text_to_links {
-  border-radius: 4px;
   outline: none;
   resize: horizontal;
   display: block;
-  margin-bottom: 8px;
 }
 .onfocus {
   border: solid rgb(146, 219, 146) 1px;
@@ -100,7 +74,7 @@ input[type=number]::-webkit-outer-spin-button {
     width: 100px;
 }
 
-/*Task#3 download block*/
+/* Task#3 download block */
 .article3-wrap {
   display: flex;
   flex-direction: row;
@@ -112,7 +86,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin-right: 0;
   border-radius: 8px;
   padding: 10px;
-  height: 170px;
+  height: 175px;
   overflow: auto;
 }
 .download-box .file-box {
@@ -129,4 +103,29 @@ input[type=number]::-webkit-outer-spin-button {
 .download-box .text-box {
   
   margin: auto 20px;
+}
+/* end of Task#3 download block */
+
+/* Task#4 Chess board */
+.cheesTable {
+  border: none;
+  border-spacing: 0;
+}
+.chess_block {
+  padding: 11px;
+  width: 0;
+  height: 0;
+}
+.black {
+  background-color: black;
+  color: white;
+}
+.white {
+  background-color: rgb(245, 168, 24);
+}
+/* end of Task#4 Chess board*/
+
+.session {
+  display: inline;
+  background-color: white;
 }
