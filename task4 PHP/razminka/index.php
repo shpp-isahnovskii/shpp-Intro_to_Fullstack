@@ -93,24 +93,30 @@
     </span>
   </article>
 
-
-
   <article>
-    <h3>Part 5</h3>
-    <p>Input text inside this box. Click mouse out from it to make a link list.</p>
-    <div class="row_wrapper">
-
-      <div><textarea name="LinksBox" id="text_to_links" class="text_to_links" cols="32" rows="10"></textarea></div>
-      <div id="link_output"></div>
-    </div>
+    <h3>Part 6</h3>
+    <p>In this task we will generate array of random numbers, then programm remove repeats, then sort and reverse this array and multiply values.</p>
+    <p>I have no time for good realisation of this task.. so actualy is's only inside the calculations file.</p>
+    <form action="calculations.php" method="POST">
+      <input type="hidden" value="task6" name="action">
+      <input type="submit" value="generate" class="btn">
+    </form>
+    <span>
+    <?= isset($_SESSION['part6Result']) ? print_r($_SESSION['part6Result']) : ""; ?>
+    </span>
   </article>
 
   <article>
-    <h3>Part 6</h3>
-    <textarea name="marked_text" id="text_to_mark" class="text_to_links" cols="32" rows="10"></textarea>
-    <input type="text" id="marker" name="merker_text">
-    <div class="btn" onclick="mark_text()">mark</div>
-    <div id="div_for_text"></div>
+    <h3>Part 8</h3>
+    <p>Input text into textarea and Programm will calc amount of symbols it this text</p>
+    <form action="calculations.php" method="POST">
+      <input type="hidden" value="task8" name="action">
+      <textarea name="textToCalc" class="text_for_calc" cols="32" rows="10">✌.|•͡˘‿•͡˘|.✌</textarea>
+      <input type="submit" value="calculate" class="btn">
+    </form>
+    <span>
+      <?= isset($_SESSION['part8Result']) ? $_SESSION['part8Result'] : ""; ?>
+    </span>
   </article>
 
   <article>

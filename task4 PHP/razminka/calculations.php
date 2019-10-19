@@ -13,8 +13,12 @@ session_start();
         break;
       case 'task4': task4Chees();
         break;
-      case 'task5': oneNumSum();
+      case 'task5': task5oneNumSum();
         break;
+        case 'task6': task6ArraySort();
+      break;
+      case 'task8': task8CalcText();
+      break;
       case 'logout': session_destroy(); returnHomepage();
         break;
       default: returnHomepage();
@@ -131,9 +135,9 @@ session_start();
    * Task 5: Summa for number parts.
    * Example: 23 = 5.
    */
-  function oneNumSum() {
+  function task5oneNumSum() {
 
-    if( ctype_digit($_POST['numItself']) ) {
+    if( ctype_digit(htmlspecialchars($_POST['numItself'])) ) {
      
       $num = (string)$_POST['numItself'];
       $arr = str_split($num);
@@ -150,6 +154,49 @@ session_start();
 
     returnHomepage();
   }
+
+  /**
+   * Task 6: Array of 100
+   * 1) generate array length 100 with rand values 1 to 10
+   * 2) remove repeats
+   * 3) sort array
+   * 4) reverse
+   * 5) multiply values by *2
+   */
+  function task6ArraySort() {
+    //1) create. Fill it with '0' by default
+    $arr = array_fill(0, 100, 0);
+    //1) generate rand numbers in range 1 to 10, fill the array
+    foreach($arr as $key=>$val) {
+      $arr[$key] = rand(1, 10);
+    }
+
+    //2) remove repeats
+    $arr = array_unique($arr, SORT_NUMERIC);
+
+    //3) sort the array
+    sort($arr);
+    
+    //4) reverse array
+    $arr = array_reverse($arr);
+
+    //5) multiply array by 2
+    function multiplyByTwo($elem) {
+      return $elem * 2;
+    }
+    $arr = array_map('multiplyByTwo', $arr);
+
+
+    $_SESSION['part6Result'] = $arr;
+    returnHomepage();
+  }
+  function task8CalcText() {
+    $text = htmlspecialchars($_POST['textToCalc']);
+
+    $_SESSION['part8Result'] = strlen(iconv('utf-8', 'utf-16le', $text))/2; // get example from here: https://www.php.net/manual/ru/function.strlen.php , autor alireza moazami
+    returnHomepage();
+  }
+
 
   /**
    * function that returns you to the homepage.
