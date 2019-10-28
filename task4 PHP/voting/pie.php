@@ -32,4 +32,11 @@
   <body>
     <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
   </body>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+    }
+
+  </style>
 </html>
