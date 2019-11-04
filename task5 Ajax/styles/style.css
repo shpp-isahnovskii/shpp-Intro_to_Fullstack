@@ -11,25 +11,23 @@
   --decoration-bg-top-4: var(--header-color);
   --decoration-bg-top-5: #7bc3ad;
   --font-theme: 'Pacifico', cursive;
+
+  --login-form-width: 356px;
 }
 
 body {
-  margin: 0;
-  height: 100vh;
-  background-color: var(--main-bg-color);
-}
-body, .chat-login-wrapper, .login-form {
   display: flex;
   flex-direction: column;
-}
-.chat-login-wrapper {
-  margin: 0 auto;
+  margin: 0;
+
+  background-color: var(--main-bg-color);
 }
 
+/*- top-line decoration panel -*/
 .decoration-top-line {
   display: flex;
 }
-.decoration-top-line div {
+.decoration-top-line > * {
   flex-grow: 1;
   height: 0.5vw;
 }
@@ -48,10 +46,22 @@ body, .chat-login-wrapper, .login-form {
 .decoration-top-line div:nth-child(5n) {
   background-color: var(--decoration-bg-top-5);
 }
+/*- end of top line -*/
+
+/*-- main content (header and loginform) --*/
+.chat-login-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 22rem;
+  align-self: center;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
 
 h1 {
-  height: 30vh;
-  line-height: 44vh;
   font-size: 4.8rem;
   letter-spacing: 0.01rem;
   color: var(--header-color);
@@ -59,15 +69,13 @@ h1 {
   font-style: italic;
   font-family: var(--font-theme);
 }
-
 .login-form label{
   font-family: 'Roboto', sans-serif;;
   color: var(--text-color);
   margin-bottom: 6px;
-  width: 356px;
+  width: var(--login-form-width);
   font-weight: bold;
 }
-
 .login-form input {
   background-color: var(--input-bg-color);
   border: none;
@@ -80,20 +88,36 @@ h1 {
 .login-form input::placeholder {
   opacity: 0.5;
 }
-
 input:focus {
   outline-color: var(--text-color);
 }
 
-input[type="submit"] {
+/*- button with the shadow -*/
+.submit-wrapper {
+  position: relative;
+}
+.submit-wrapper input {
+  width: 100%;
+}
+.submit-wrapper input[type="submit"] {
   font-size: 1.1rem;
   color: var(--header-color);
   background-color: var(--text-color);
   font-weight: 100;
   margin-bottom: 0;
 }
+
 .shadow {
-  background-color: silver;
-  transform: rotate(45deg);
+  position: absolute;
+  background: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.0));
+  width: 22.1rem;
+  height: 207px;
+  z-index: -1;
+  top: 17px;
+  left: 38px;
+  transform: rotate(-6deg) skew(15deg);
 }
+/*- end for button -*/
+/*-- end for main content --*/
+
 /*https://codepen.io/100ants/pen/jONeYPE?editors=0100*/
