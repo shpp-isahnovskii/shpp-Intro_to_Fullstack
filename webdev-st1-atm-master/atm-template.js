@@ -12,16 +12,19 @@ const ATM = {
     ],
     // authorization
     auth(id, pin) {
+
+        this.logout();
+
         const user = this.users.find(val => (val.id == id) && (val.pin == pin) );
-        
-        if(user === undefined) {
-            console.log('autorization fail');
-            this.isAuth = false;
-        } else {
-            console.log('autorization complete');
+
+        if(user) {
             this.currentUser = user;
             this.isAuth = true;
+            console.log('autorization complete');
+        } else {
+            console.log('autorization faild');
         }
+
     },
     // check current debet
     check() {
@@ -29,38 +32,47 @@ const ATM = {
     },
     // get cash - available for user only
     getCash(amount) {
-        if( (this.cash - amount) < 0) {
-            console.log('ATM has not enough money!');
-        } else {
-            if(this.currentUser.type == 'user') {
-                if(this.currentUser.debet >= amount) {
+        if( this.checkAuth('user') ) { //check user is valid and login
+            const ATMCash = checkATMCash.bind(this);
+            ATMCash();
+        }
 
-                    this.currentUser.debet -= amount;
-                    this.cash -= amount;
-                    this.addLogs('get', amount);
-                    this.check();
-                } else {
-                    console.log('not enough cash on the debet card');
-                }
-            
+        function checkATMCash() {
+
+            if( (this.cash - amount) >= 0) { //check ATM cash
+                const userCash = checkUserCash.bind(this);
+                userCash();
             } else {
-                console.log('authorization required');
+                console.log('ATM has not enough money!');
             }
+        }
+        function checkUserCash() {
+            if(this.currentUser.debet >= amount) { //check User cash
+                const operation = confirmOperation.bind(this);
+                operation();
+            } else {
+                console.log('not enough cash on the debet card');
+            }
+        }
+        function confirmOperation() { //get money
+            this.currentUser.debet -= amount;
+            this.cash -= amount;
+            this.addLogs('get', amount);
+            this.check();
         }
     },
     // load cash - available for user only
     loadCash(amount) {
-        if(this.currentUser.type == 'user') {
+        if( this.checkAuth('user') ) {
             this.currentUser.debet += amount;
             this.cash += amount;
-            
             this.addLogs('load', amount);
             this.check();
         }
     },
     // load cash to ATM - available for admin only - EXTENDED
     loadAtmCash(amount) {
-        if(this.currentUser.type == 'admin') {
+        if( this.checkAuth('admin') ) {
             this.cash += amount;
             this.addLogs('loadATM', amount);
             console.log(`ATM:${this.cash}`);
@@ -68,18 +80,38 @@ const ATM = {
     },
     // get cash actions logs - available for admin only - EXTENDED
     getLogs() {
-        if(this.currentUser.type == 'admin') {
+        if( this.checkAuth('admin') ) {
             console.table(this.logs);
         }
     },
     // log out
     logout() {
-        this.isAuth = false;
-        this.currentUser = {};
+        if(this.isAuth) {
+            this.isAuth = false;
+            this.currentUser = {};
+        } else {
+            console.log('login first');
+        }
     },
 
     //atm logs
     addLogs(operation, value) {
         this.logs.push("user:"+ this.currentUser.id +", " + operation + ":" + value);
+    },
+
+    //authorization name check
+    checkAuth(name) {
+
+        if(this.isAuth) { //authorization - true
+            if( this.currentUser.type !== name ) { //name - false
+                console.log("you have no permissions");
+                return false;
+            } else {
+                return true; //name - true
+            }
+        } else { 
+        }
+        console.log('authorization required'); //authorization - false 
+        return false;
     }
 };

@@ -25,35 +25,39 @@ body {
 
 /*- top-line decoration panel -*/
 .decoration-top-line {
-  display: flex;
-}
-.decoration-top-line > * {
-  flex-grow: 1;
-  height: 0.5vw;
-}
-.decoration-top-line div:nth-child(5n+1) {
-  background-color: var(--decoration-bg-top-1);
-}
-.decoration-top-line div:nth-child(5n+2) {
-  background-color: var(--decoration-bg-top-2);
-}
-.decoration-top-line div:nth-child(5n+3) {
-  background-color: var(--decoration-bg-top-3);
-}
-.decoration-top-line div:nth-child(5n+4) {
-  background-color: var(--decoration-bg-top-4);
-}
-.decoration-top-line div:nth-child(5n) {
-  background-color: var(--decoration-bg-top-5);
+  height: 1vh;
+
+  /*solution for gradient: https://stackoverflow.com/questions/45097591/generate-solid-colors-using-css-linear-gradient-not-smooth-colors */
+  background: linear-gradient( to right,
+  var(--decoration-bg-top-1) 10%,
+  var(--decoration-bg-top-2) 10%,
+  var(--decoration-bg-top-2) 20%,
+  var(--decoration-bg-top-3) 20%,
+  var(--decoration-bg-top-3) 30%,
+  var(--decoration-bg-top-4) 30%,
+  var(--decoration-bg-top-4) 40%,
+  var(--decoration-bg-top-5) 40%,
+  var(--decoration-bg-top-5) 50%,
+  var(--decoration-bg-top-1) 50%,
+  var(--decoration-bg-top-1) 60%,
+  var(--decoration-bg-top-2) 60%,
+  var(--decoration-bg-top-2) 70%,
+  var(--decoration-bg-top-3) 70%,
+  var(--decoration-bg-top-3) 80%,
+  var(--decoration-bg-top-4) 80%,
+  var(--decoration-bg-top-4) 90%,
+  var(--decoration-bg-top-5) 90%,
+  var(--decoration-bg-top-5) 100% );
 }
 /*- end of top line -*/
 
 /*-- main content (header and loginform) --*/
-.chat-login-wrapper {
+.chat-login--wrapper {
   display: flex;
   flex-direction: column;
   max-width: 22rem;
   align-self: center;
+  margin-top: 4rem;
 }
 .login-form {
   display: flex;
@@ -76,7 +80,7 @@ h1 {
   width: var(--login-form-width);
   font-weight: bold;
 }
-.login-form input {
+input {
   background-color: var(--input-bg-color);
   border: none;
   padding: 10px 10px 8px 10px;
@@ -85,7 +89,7 @@ h1 {
   color: var(--text-color);
   margin-bottom: 26px;
 }
-.login-form input::placeholder {
+input::placeholder {
   opacity: 0.5;
 }
 input:focus {
@@ -99,7 +103,8 @@ input:focus {
 .submit-wrapper input {
   width: 100%;
 }
-.submit-wrapper input[type="submit"] {
+
+input[type="submit"] {
   font-size: 1.1rem;
   color: var(--header-color);
   background-color: var(--text-color);
@@ -119,5 +124,42 @@ input:focus {
 }
 /*- end for button -*/
 /*-- end for main content --*/
+
+/*- page 2 the in-chat-menu -*/
+
+.chat-window--wrapper {
+  width: 40rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 4rem auto;
+  padding-right: 16px;
+}
+
+#chatOutput {
+  overflow-y: scroll;
+  height: 260px;
+  width: 500px;
+  resize: none;
+  outline: none;
+  margin-bottom: 1rem;
+  background-color: var(--header-color);
+}
+
+.chat-form {
+  display: flex;
+  width: 502px;
+  justify-content: space-between;
+}
+.chat-form input {
+  margin-bottom: 0;
+  flex-grow: 3;
+}
+input.chat-btn {
+  color: white;
+  flex-grow: 1;
+  margin-left: 20px;
+}
+/*- page 2 the in-chat-menu -*/
 
 /*https://codepen.io/100ants/pen/jONeYPE?editors=0100*/
