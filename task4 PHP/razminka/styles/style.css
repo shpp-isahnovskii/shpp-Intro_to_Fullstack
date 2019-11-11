@@ -129,3 +129,15 @@ input[type=number]::-webkit-outer-spin-button {
   display: inline;
   background-color: white;
 }
+
+.part6-wrapper {
+  display: flex;
+  font-size: 12px;
+  justify-content: center;
+}
+.part6-wrapper div {
+  width: 200px;
+  border: 1px solid silver;
+  margin: 0 10px;
+  padding: 10px;
+}

@@ -17,7 +17,7 @@
 
   <article>
       <h3>Part 1</h3>
-      <p>Hello there. Fill this two inputs with numbers and I'll will add this two values. Range for inputs is -1000 to 1000</p>
+      <p>Hello there. Fill this two inputs with numbers and I'll will calculate value in Range between them. Min input value is -1000 max 1000</p>
       input two numbers:
     <form autocomplete="off" action="calculations.php" method="POST">
       <input type="number" min="-1000" max="1000" name="val1" placeholder="3">
@@ -96,16 +96,52 @@
   <article>
     <h3>Part 6</h3>
     <p>In this task we will generate array of random numbers, then programm remove repeats, then sort and reverse this array and multiply values.</p>
-    <p>I have no time for good realisation of this task.. so actualy is's only inside the calculations file.</p>
     <form action="calculations.php" method="POST">
       <input type="hidden" value="task6" name="action">
       <input type="submit" value="generate" class="btn">
     </form>
-    <span>
-    <?= isset($_SESSION['part6Result']) ? print_r($_SESSION['part6Result']) : ""; ?>
-    </span>
-  </article>
-
+    <div class="part6-wrapper">
+      <div>
+        <span>Create array:</span><br>
+        <pre>
+          <?php
+            echo isset($_SESSION['part6Create']) ? print_r($_SESSION['part6Create']): "";
+          ?>
+        </pre>
+      </div>
+      <div>
+        <span>Remove repeats:</span><br>
+        <pre>
+          <?php
+            echo isset($_SESSION['part6RemoveRepeats']) ? print_r($_SESSION['part6RemoveRepeats']): "";
+          ?>
+        </pre>
+      </div>
+      <div>
+        <span>Sort array:</span><br>
+        <pre>
+          <?php
+            echo isset($_SESSION['part6Sort']) ? print_r($_SESSION['part6Sort']): "";
+          ?>
+        </pre>
+      </div>
+      <div>
+        <span>Reverse array:</span><br>
+        <pre>
+          <?php
+            echo isset($_SESSION['part6Reverse']) ? print_r($_SESSION['part6Reverse']): "";
+          ?>
+        </pre>
+      </div>
+      <div>
+        <span>Double result:</span><br>
+        <pre>
+          <?php
+            echo isset($_SESSION['part6multiply']) ? print_r($_SESSION['part6multiply']): "";
+          ?>
+        </pre>
+      </div>
+    </div>
   <article>
     <h3>Part 8</h3>
     <p>Input text into textarea and Programm will calc amount of symbols it this text</p>
@@ -115,7 +151,11 @@
       <input type="submit" value="calculate" class="btn">
     </form>
     <span>
-      <?= isset($_SESSION['part8Result']) ? $_SESSION['part8Result'] : ""; ?>
+      new lines: <?php echo isset($_SESSION['part8lines']) ? $_SESSION['part8lines'] : "-"; ?>
+      <br>
+      characters: <?php echo isset($_SESSION['part8chars']) ? $_SESSION['part8chars'] : "-"; ?>
+      <br>
+      spaces: <?php echo isset($_SESSION['part8spaces']) ? $_SESSION['part8spaces'] : "-"; ?>
     </span>
   </article>
 
@@ -130,6 +170,5 @@
       <input type="submit" value="logout" name="action" class="btn">
     </form>
   </article>
-  <!-- <script src="./script/warm_up.js" onload="draw_canvas()"></script> -->
 </body>   
 </html>

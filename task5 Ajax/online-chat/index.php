@@ -1,3 +1,8 @@
+<?php 
+  session_start();
+  
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +18,7 @@
   <div class="decoration-top-line"></div>
   <div class="chat-login--wrapper">
     <h1>Easy Chat</h1>
-    <form class="login-form" action="./chat-window.php">
+    <form class="login-form" action="" method="post">
       <label for="name">Enter your name</label>
       <input type="text" name="" id="name" placeholder="John Doe" autocomplete="off" required>
       <label for="pass">Enter your password</label>

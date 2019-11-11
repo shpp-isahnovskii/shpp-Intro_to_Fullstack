@@ -13,32 +13,29 @@
 <html>
   <head>
     <link rel="shortcut icon" href="./icons-folder/favicon.ico">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-    
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable(<?php echo json_encode($pie_file)?>);
-
-        var options = {
-          title: 'what is your favorite breakfast?:',
-          is3D: true,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        chart.draw(data, options);
-      }
-    </script>
+    <link rel="stylesheet" href="./styles/index.css">
   </head>
-  <body>
+  <body id="page-two">
     <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
-  </body>
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-    }
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+  
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable(<?php echo json_encode($pie_file)?>);
 
-  </style>
+      var options = {
+        title: 'what is your favorite breakfast?:',
+        is3D: true,
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+      chart.draw(data, options);
+    }
+  </script>
+  <p>go back: <button onclick="window.location.href='index.php'">go</button></p>
+
+  </body>
 </html>

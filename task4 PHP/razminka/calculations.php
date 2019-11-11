@@ -3,8 +3,8 @@
 session_start();
 
   /* Triggers for different POST forms. */
-  if (isset($_POST['action'])) {
-    switch (htmlentities($_POST['action'])) { //htmlentities convert all to text. Typical hacker protection
+  if ( isset($_POST['action']) ) {
+    switch ( htmlentities($_POST['action']) ) { //htmlentities convert all to text. Typical hacker protection
       case 'task1': task1Sum();
         break;
       case 'task2': task2Sum();
@@ -27,12 +27,16 @@ session_start();
   }
 
   /**
-   * Task 1. Summa for two numbers in range -1000 to 1000.
+   * Task 1. Summa for numbers in range -1000 to 1000.
    */
   function task1Sum() {
     $a = htmlspecialchars($_POST['val1']) ?: 0;
     $b = htmlspecialchars($_POST['val2']) ?: 0;
-    $_SESSION['part1Result'] = $a + $b;
+    for ($i= $a; $i <= $b; $i++) { 
+      $sum += $i;
+    }
+
+    $_SESSION['part1Result'] = $sum;
     returnHomepage();
   }
 
@@ -41,19 +45,20 @@ session_start();
    * Task 2. Summa for numbers what's end at 2,3,7.
    */
   function task2Sum() {
+    $counter_triggers = [2, 3, 7];
     $a = htmlspecialchars($_POST['val1']) ?: 0;
     $b = htmlspecialchars($_POST['val2']) ?: 0;
     $sum = 0;
     $remainder;
 
-    if($a < $b) {
+    if($a > $b) {
       list($a, $b) = array($b, $a); //swap $a and $b if $a less then $b  - found here: https://stackoverflow.com/questions/18356437/swap-two-variables-value-without-using-third-variable-in-php
     }
 
-    for ($i = $b; $i <= $a; $i++) {
-      $remainder = abs($i % 10);
-      if ($remainder === 2 || $remainder === 3 || $remainder === 7) {
-        $sum += $i;
+    for (; $a <= $b; $a++) {
+      $remainder = abs($a % 10);
+      if ( in_array($remainder, $counter_triggers) ) {
+        $sum += $remainder;
       }
     }
     $_SESSION['part2Result'] = $sum;
@@ -170,15 +175,18 @@ session_start();
     foreach($arr as $key=>$val) {
       $arr[$key] = rand(1, 10);
     }
+    $_SESSION['part6Create'] = $arr;
 
     //2) remove repeats
     $arr = array_unique($arr, SORT_NUMERIC);
+    $_SESSION['part6RemoveRepeats'] = $arr;
 
     //3) sort the array
     sort($arr);
-    
+    $_SESSION['part6Sort'] = $arr;
     //4) reverse array
     $arr = array_reverse($arr);
+    $_SESSION['part6Reverse'] = $arr;
 
     //5) multiply array by 2
     function multiplyByTwo($elem) {
@@ -186,14 +194,20 @@ session_start();
     }
     $arr = array_map('multiplyByTwo', $arr);
 
-
-    $_SESSION['part6Result'] = $arr;
+    $_SESSION['part6multiply'] = $arr;
     returnHomepage();
   }
+
+  /**
+   * Task:8 
+   * Symbols calculator
+   */
   function task8CalcText() {
     $text = htmlspecialchars($_POST['textToCalc']);
 
-    $_SESSION['part8Result'] = strlen(iconv('utf-8', 'utf-16le', $text))/2; // get example from here: https://www.php.net/manual/ru/function.strlen.php , autor alireza moazami
+    $_SESSION['part8lines'] = substr_count($text, "\n");
+    $_SESSION['part8spaces'] = substr_count($text, " ");
+    $_SESSION['part8chars'] = mb_strlen($text) - $_SESSION['part8spaces'];
     returnHomepage();
   }
 
