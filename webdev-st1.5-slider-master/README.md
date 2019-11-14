@@ -1,6 +1,6 @@
-# WD_ST1.5 Slider
+﻿# WD_ST1.5 Slider
 
-Создаем примитивный jQuery slider.
+Создаем примитивный JS slider.
 
 из основного:
 
