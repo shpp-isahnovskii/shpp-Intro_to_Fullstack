@@ -123,6 +123,11 @@ input[type="submit"] {
   transform: rotate(-6deg) skew(15deg);
 }
 /*- end for button -*/
+
+.error {
+  color: darkred;
+  font-weight: bold;
+}
 /*-- end for main content --*/
 
 /*- page 2 the in-chat-menu -*/
@@ -136,16 +141,57 @@ input[type="submit"] {
   padding-right: 16px;
 }
 
-#chatOutput {
+.chat-content {
+  display: flex;
+  flex-direction: column;
   overflow-y: scroll;
   height: 260px;
-  width: 500px;
+  width: 502px;
   resize: none;
   outline: none;
   margin-bottom: 1rem;
   background-color: var(--header-color);
+
+  margin: 0px;
 }
 
+.chat-content article {
+  display: flex;
+}
+
+.chat-name {
+  align-self: flex-end;
+  margin: 10px 0 14px 14px;
+  font-size: 1.1rem;
+}
+
+.chat-message-wrapper {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: white;
+  width: 100%;
+  margin: 10px;
+  align-self: flex-end;
+  padding: 10px 16px;
+}
+.chat-form .chat-text {
+  border-radius: 0 0 0px 8px;
+}
+.chat-form .chat-btn {
+  border-radius: 0 0 8px 0px;
+}
+
+.chat-message-wrapper p {
+  text-align: justify;
+  margin: 0;
+  padding: 0;
+}
+.chat-message-wrapper .chat-time {
+  margin-top: 10px;
+  align-self: flex-end;
+  font-size: 0.8rem;
+}
 .chat-form {
   display: flex;
   width: 502px;
@@ -154,11 +200,24 @@ input[type="submit"] {
 .chat-form input {
   margin-bottom: 0;
   flex-grow: 3;
+  margin-top: 16px;
 }
+.chat-form input:focus {
+  background-color: white;
+  outline: none;
+}
+
 input.chat-btn {
   color: white;
   flex-grow: 1;
   margin-left: 20px;
+
+  transition: background-color .3s ease-in-out;
+  
+}
+input.chat-btn:hover {
+  cursor: pointer;
+  background-color: #3f393d;
 }
 /*- page 2 the in-chat-menu -*/
 

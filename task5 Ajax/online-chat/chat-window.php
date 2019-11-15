@@ -1,3 +1,69 @@
+<?php
+session_start();
+const USERS_URL = './database/users/users.json';
+const CHATING_URL = './database/chat/chat.json';
+$_SESSION['err'] = '';
+
+$chat_content = '';
+
+
+if( !isset($_POST['name']) && !isset($_POST['pass']) ) {
+  header('Location: ./index.php');
+} else {
+
+  //get login data
+  $name = $_POST['name'];
+  $pass = $_POST['pass'];
+  //get authorization status
+  $authorisation_status = user_autho($name, $pass);
+
+  //make choice
+  if($authorisation_status) {
+    $_SESSION['err'] = false; //error using in the authorisation page
+    $chat_data = data_extract(CHATING_URL);
+    $chat_content = show_chat($chat_data);
+  } else {
+    $_SESSION['err'] = true;
+    header('Location: ./index.php');
+  }
+
+}
+
+//search user data if not found - return to main page
+function user_autho($name, $pass) {
+  $users_data = data_extract(USERS_URL);//get users data
+
+  foreach ($users_data as $key => $value) {
+    if($key == $name && $value == $pass ) {
+      return true;
+    }
+  }
+  return false;
+}
+//extract array of users in format name => pass
+function data_extract($path) {
+  $json = file_get_contents($path);
+  return json_decode($json);
+}
+
+function show_chat($data) {
+  $content = '';
+  foreach ($data as $element => $message) { //read some 1 message
+    $m = get_object_vars($message);
+      $content .= 
+     '<article>
+        <h5 class="chat-name">'.$m['name'].'</h5>
+        <div class="chat-message-wrapper">
+          <p class="chat-message">'.$m['message'].'</p>
+          <p class="chat-time">'.$m['time'].'</p>
+        </div>
+      </article>';
+  }
+  return $content;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,15 +79,11 @@
   <div class="decoration-top-line"></div>
   <div class="chat-window--wrapper">
     <h1>Easy Chat</h1>
-    <textarea name="" id="chatOutput" readonly>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae reiciendis cumque aspernatur impedit! Blanditiis maiores inventore veniam est amet eius repellat tempore? Itaque incidunt cumque non, velit hic aspernatur mollitia.
-    Dignissimos esse suscipit, placeat asperiores maxime id quibusdam veritatis enim sint corporis quas distinctio architecto. Alias, recusandae. Sequi exercitationem nisi dolores molestiae dignissimos velit corporis optio, perspiciatis praesentium iure cupiditate!
-    Ratione voluptatem similique consectetur distinctio facilis, dignissimos incidunt recusandae repudiandae ipsam tempore facere voluptates? Provident neque tempore vitae facilis ad? Quaerat cupiditate ex iusto facere incidunt vel, nesciunt nam dicta.
-    Dolorem, perspiciatis! Eaque debitis, expedita, reiciendis distinctio voluptate natus deleniti iusto, inventore exercitationem blanditiis illo. Molestiae provident impedit ab laudantium soluta maxime enim non ipsum placeat nulla! Rerum, ipsum repudiandae.
-    Aspernatur, blanditiis perferendis! Quos aut voluptatibus quis incidunt? Ullam et quod vitae voluptate dicta doloribus accusamus autem, adipisci eveniet facilis tenetur minus minima architecto fugiat tempora sit, odio saepe officiis?
-
-    </textarea>
+    <div id="chatOutput" class="chat-content">
+      <?php echo $chat_content; ?>
+    </div>
     <form class="chat-form" action="" method="post">
-      <input type="text" name="" >
+      <input class="chat-text" type="text" name="" >
       <input class="chat-btn" type="submit" value="Send">
     </form>
   </div>
