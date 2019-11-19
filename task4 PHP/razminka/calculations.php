@@ -58,7 +58,7 @@ session_start();
     for (; $a <= $b; $a++) {
       $remainder = abs($a % 10);
       if ( in_array($remainder, $counter_triggers) ) {
-        $sum += $remainder;
+        $sum += $a;
       }
     }
     $_SESSION['part2Result'] = $sum;
@@ -68,7 +68,7 @@ session_start();
   /**
    * Task 3. File Downloader: 
    * 1)Adding to the folder; 
-   * 2)download from it.
+   * 2)download from it. from > Task3listloader.php in the root repo
    * Complex task. Used few addition function to do it.
    */
   function task3Download() {
@@ -205,7 +205,7 @@ session_start();
   function task8CalcText() {
     $text = htmlspecialchars($_POST['textToCalc']);
 
-    $_SESSION['part8lines'] = substr_count($text, "\n");
+    $_SESSION['part8lines'] = substr_count($text, "\n") + 1;
     $_SESSION['part8spaces'] = substr_count($text, " ");
     $_SESSION['part8chars'] = mb_strlen($text) - $_SESSION['part8spaces'];
     returnHomepage();

@@ -20,8 +20,8 @@
       <p>Hello there. Fill this two inputs with numbers and I'll will calculate value in Range between them. Min input value is -1000 max 1000</p>
       input two numbers:
     <form autocomplete="off" action="calculations.php" method="POST">
-      <input type="number" min="-1000" max="1000" name="val1" placeholder="3">
-      <input type="number" min="-1000" max="1000" name="val2" placeholder="4">
+      <input type="number" min="-1000" max="1000" name="val1" placeholder="0">
+      <input type="number" min="-1000" max="1000" name="val2" placeholder="0">
       <span>
       <?= isset($_SESSION['part1Result']) ? "sum of values is ".$_SESSION['part1Result'] : ""; ?>
       </span>
@@ -34,8 +34,8 @@
     <h3>Part 2</h3>
     <p>Fill this two inputs with numbers. I'll will calculate all numbers between this two, what's ends for 2,3,7.</p>
     <form autocomplete="off" action="calculations.php" method="POST">
-      <input type="number" min="-1000" max="1000" name="val1" placeholder="2">
-      <input type="number" min="-1000" max="1000" name="val2"placeholder="12">
+      <input type="number" min="-1000" max="1000" name="val1" placeholder="0">
+      <input type="number" min="-1000" max="1000" name="val2"placeholder="0">
       <span>
       <?= isset($_SESSION['part2Result']) ? "sum of values is ".$_SESSION['part2Result'] : ""; ?>
       </span>
@@ -151,7 +151,7 @@
       <input type="submit" value="calculate" class="btn">
     </form>
     <span>
-      new lines: <?php echo isset($_SESSION['part8lines']) ? $_SESSION['part8lines'] : "-"; ?>
+      lines: <?php echo isset($_SESSION['part8lines']) ? $_SESSION['part8lines'] : "-"; ?>
       <br>
       characters: <?php echo isset($_SESSION['part8chars']) ? $_SESSION['part8chars'] : "-"; ?>
       <br>
