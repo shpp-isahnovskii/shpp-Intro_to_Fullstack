@@ -87,6 +87,9 @@ function show_chat($data) {
       <input class="chat-btn" type="submit" value="Send">
     </form>
   </div>
+  <div id="demo">hm..</div>
+  <button onclick="loadDoc()">go</button>
+  
   <script src="./script/script.js"></script>
 </body>
 </html>

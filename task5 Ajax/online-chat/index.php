@@ -4,6 +4,7 @@
   if( isset($_SESSION['err']) )
   { 
     $err = '* please enter valid name and pass'; 
+    session_destroy();
   }
 
 ?>
