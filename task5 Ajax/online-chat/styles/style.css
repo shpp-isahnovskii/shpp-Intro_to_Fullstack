@@ -55,9 +55,9 @@ body {
 .chat-login--wrapper {
   display: flex;
   flex-direction: column;
-  max-width: 22rem;
   align-self: center;
   margin-top: 4rem;
+  align-items: center;
 }
 .login-form {
   display: flex;
@@ -72,6 +72,7 @@ h1 {
   font-weight: 100;
   font-style: italic;
   font-family: var(--font-theme);
+  width: 362px;
 }
 .login-form label{
   font-family: 'Roboto', sans-serif;;
@@ -115,7 +116,7 @@ input[type="submit"] {
 .shadow {
   position: absolute;
   background: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.0));
-  width: 22.1rem;
+  width: 22.35rem;
   height: 207px;
   z-index: -1;
   top: 17px;
@@ -146,13 +147,15 @@ input[type="submit"] {
   flex-direction: column;
   overflow-y: scroll;
   height: 260px;
-  width: 502px;
   resize: none;
   outline: none;
   margin-bottom: 1rem;
   background-color: var(--header-color);
 
   margin: 0px;
+}
+.chat-content, .chat-form {
+  width: 520px;
 }
 
 .chat-content article {
@@ -194,7 +197,6 @@ input[type="submit"] {
 }
 .chat-form {
   display: flex;
-  width: 502px;
   justify-content: space-between;
 }
 .chat-form input {
@@ -203,7 +205,7 @@ input[type="submit"] {
   margin-top: 16px;
 }
 .chat-form input:focus {
-  background-color: white;
+  background-color: #fffedf;
   outline: none;
 }
 
@@ -218,6 +220,9 @@ input.chat-btn {
 input.chat-btn:hover {
   cursor: pointer;
   background-color: #3f393d;
+}
+input.chat-btn:focus {
+  background-color: #4d4349;
 }
 /*- page 2 the in-chat-menu -*/
 
