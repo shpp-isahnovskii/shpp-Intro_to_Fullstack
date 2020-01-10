@@ -8,17 +8,13 @@ const LOGIN_PAGE = './components/login-window.php';
 main();
 
 function main() {
-  if(isset($_POST['logout'])) { // button in chat
-    session_unset();
-  }
-
-  if( isset($_SESSION['name']) && isset($_SESSION['pass']) ) { //if have data
+  if( isset($_POST['name']) && isset($_POST['pass']) ) { //if have data
+    $_SESSION['name'] = $_POST['name'];
+    $_SESSION['pass'] = $_POST['pass'];
     setActiveForm(); //- try to login
     return;
   }
   if ($_SERVER['REQUEST_METHOD'] == 'POST') { //if got data from post
-    $_SESSION['name'] = $_POST['name'];
-    $_SESSION['pass'] = $_POST['pass'];
     setActiveForm(); //- try to login
   } else {
     set_login_form();
