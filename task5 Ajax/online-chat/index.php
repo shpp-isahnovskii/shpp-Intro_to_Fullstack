@@ -18,7 +18,7 @@
     <div class="chat-login--wrapper">
       <h1>Easy Chat</h1>
       <!-- login form or chat -->
-      <?php require('./logic.php') ?>
+      <?php require_once('./logic.php') ?>
       <!-- end login form or chat -->
     </div>
   </body>

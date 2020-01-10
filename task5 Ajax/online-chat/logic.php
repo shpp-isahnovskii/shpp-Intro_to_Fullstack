@@ -5,40 +5,39 @@ const CHATING_URL = './database/chat/chat.json';
 const CHAT_PAGE = './components/chat-window.php';
 const LOGIN_PAGE = './components/login-window.php';
 
-$_SESSION['err'] = false;
-$_SESSION['chat_content'] = '';
-$_SESSION['current_page'] = '';
+main();
 
-chose_current_window();
-
-function chose_current_window() {
-
-  if ($_SERVER["REQUEST_METHOD"] == "POST") { //TODO refactoring
-    set_login_form();
-    $_SESSION['err'] = true;
+function main() {
+  if(isset($_POST['logout'])) { // button in chat
+    session_unset();
   }
-  if( !isset($_POST['name']) || !isset($_POST['pass']) ) {
-    set_login_form();
-    $_SESSION['err'] = false;
 
+  if( isset($_SESSION['name']) && isset($_SESSION['pass']) ) { //if have data
+    setActiveForm(); //- try to login
+    return;
+  }
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') { //if got data from post
+    $_SESSION['name'] = $_POST['name'];
+    $_SESSION['pass'] = $_POST['pass'];
+    setActiveForm(); //- try to login
   } else {
-    if(user_autho($_POST['name'], $_POST['pass']) ){
-      set_chat_form();
-      $_SESSION['err'] = true;
-
-    } else {
-      set_login_form();
-    }
+    set_login_form();
+    require_once($_SESSION['current_page']);
   }
-  require($_SESSION['current_page']);
+}
+
+function setActiveForm() {
+  if( login() ) {
+    set_chat_form();//if login - go to chat page
+  } else {
+    set_login_form();//if not - go to login page
+  }
+  require_once($_SESSION['current_page']);
 }
 
 function login() {
-    //get login data
-    $name = $_POST['name'];
-    $pass = $_POST['pass'];
-    //get authorization status
-    return user_autho($name, $pass);
+  //get authorization status true or false
+  return user_autho($_SESSION['name'], $_SESSION['pass']);
 }
 
 //extract chat data and show it

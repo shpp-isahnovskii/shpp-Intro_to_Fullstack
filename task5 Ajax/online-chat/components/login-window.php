@@ -1,10 +1,5 @@
 <?php 
     $err = '';
-    if( $_SESSION['err'] === true )
-    { 
-      $err = '* please enter valid name and pass'; 
-      session_destroy();
-    }
 ?>
 
 <form class="login-form" method="post">

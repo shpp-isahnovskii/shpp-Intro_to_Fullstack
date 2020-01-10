@@ -4,6 +4,15 @@ window.onload = function() {
   textarea.scrollTop = textarea.scrollHeight;
 }
 
+//prevent submit for chat page
+$('#form-disable').on('submit', function() {
+  console.log('asd');
+  e.preventDefault();
+});
+
+function logout() {
+  window.location.href = "./components/logout.php";
+}
 
 function loadDoc() {
   var xhttp;

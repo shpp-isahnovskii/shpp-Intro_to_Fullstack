@@ -224,6 +224,20 @@ input.chat-btn:hover {
 input.chat-btn:focus {
   background-color: #4d4349;
 }
-/*- page 2 the in-chat-menu -*/
+.logout-btn {
+  margin-top: 20px;
+  width: 60px;
+  height: 30px;
+  font-size: 1.0rem;
+  background-color: #4d4349;
+  color: white;
+  opacity: 0.8;
+  border: none;
+  border-radius: 8px;
+}
+.logout-btn:hover {
+  cursor: pointer;
+}
+/*-end of page 2 the in-chat-menu -*/
 
 /*https://codepen.io/100ants/pen/jONeYPE?editors=0100*/
