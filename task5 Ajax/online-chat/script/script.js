@@ -5,8 +5,7 @@ window.onload = function() {
 }
 
 //prevent submit for chat page
-$('#form-disable').on('submit', function() {
-  console.log('asd');
+$('#form-disable').on('submit', e => {
   e.preventDefault();
 });
 

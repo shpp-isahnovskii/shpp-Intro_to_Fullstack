@@ -15,6 +15,12 @@ function main() {
     return;
   }
   if ($_SERVER['REQUEST_METHOD'] == 'POST') { //if got data from post
+    if(isset($_POST['text'])) {
+      //refresh chat
+    } else {
+      //...
+    }
+    //make two parts: 1 for login, 2 for refresh chat
     setActiveForm(); //- try to login
   } else {
     set_login_form();
